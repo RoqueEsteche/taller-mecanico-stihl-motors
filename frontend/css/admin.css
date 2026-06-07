@@ -1,0 +1,343 @@
+/* ============================================================
+   PowerFix — Panel Administrativo
+   Extiende styles.css con estilos específicos del dashboard
+   ============================================================ */
+
+/* ── LAYOUT ADMIN ────────────────────────────────────────────── */
+.admin-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+/* ── SIDEBAR ─────────────────────────────────────────────────── */
+.sidebar {
+  background-color: var(--color-dark);
+  color: rgba(255,255,255,0.8);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: 260px;
+  z-index: 100;
+  overflow-y: auto;
+  transition: transform var(--transition-base);
+}
+
+.sidebar__brand {
+  padding: var(--sp-6);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar__logo {
+  font-family: var(--font-heading);
+  font-size: var(--fs-2xl);
+  color: #fff;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.sidebar__logo-accent { color: var(--color-accent); }
+
+.sidebar__badge {
+  font-size: var(--fs-xs);
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: var(--sp-1);
+}
+
+.sidebar__nav { flex: 1; padding: var(--sp-4) 0; }
+
+.sidebar__section-label {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  padding: var(--sp-4) var(--sp-6) var(--sp-2);
+}
+
+.sidebar__item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-6);
+  font-size: var(--fs-sm);
+  color: rgba(255,255,255,0.6);
+  border-left: 3px solid transparent;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.sidebar__item:hover {
+  color: #fff;
+  background-color: rgba(255,255,255,0.06);
+}
+
+.sidebar__item--active {
+  color: #fff;
+  background-color: rgba(229,95,10,0.15);
+  border-left-color: var(--color-accent);
+}
+
+.sidebar__item-icon { font-size: var(--fs-lg); width: 20px; text-align: center; flex-shrink: 0; }
+.sidebar__item-badge {
+  margin-left: auto;
+  padding: 1px 8px;
+  background-color: var(--color-accent);
+  color: #fff;
+  border-radius: var(--radius-full);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.sidebar__footer {
+  padding: var(--sp-4) var(--sp-6);
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar__user {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.sidebar__user-avatar {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-heading);
+  font-size: var(--fs-base);
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.sidebar__user-name  { font-size: var(--fs-sm); font-weight: 600; color: #fff; }
+.sidebar__user-role  { font-size: var(--fs-xs); color: rgba(255,255,255,0.4); text-transform: capitalize; }
+
+.sidebar__logout {
+  margin-left: auto;
+  color: rgba(255,255,255,0.4);
+  font-size: var(--fs-lg);
+  padding: var(--sp-1);
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast);
+}
+
+.sidebar__logout:hover { color: var(--color-error); }
+
+/* ── MAIN CONTENT ────────────────────────────────────────────── */
+.admin-main {
+  margin-left: 260px;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── TOP BAR ─────────────────────────────────────────────────── */
+.topbar {
+  background-color: var(--color-bg-alt);
+  border-bottom: 1px solid var(--color-gray-100);
+  padding: var(--sp-4) var(--sp-8);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.topbar__left { display: flex; flex-direction: column; }
+.topbar__title { font-family: var(--font-heading); font-size: var(--fs-2xl); letter-spacing: 0.03em; color: var(--color-dark); }
+.topbar__subtitle { font-size: var(--fs-xs); color: var(--color-gray-500); }
+
+.topbar__right { display: flex; align-items: center; gap: var(--sp-4); }
+
+/* ── ADMIN PANELS ────────────────────────────────────────────── */
+.admin-panel { display: none; padding: var(--sp-8); }
+.admin-panel--active { display: block; }
+
+/* ── STAT CARDS ──────────────────────────────────────────────── */
+.stat-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--sp-5);
+  margin-bottom: var(--sp-8);
+}
+
+.stat-card {
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-xl);
+  padding: var(--sp-6);
+  box-shadow: var(--shadow-sm);
+  border-left: 4px solid var(--color-accent);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.stat-card--success  { border-left-color: var(--color-success); }
+.stat-card--warning  { border-left-color: var(--color-warning); }
+.stat-card--info     { border-left-color: var(--color-info); }
+.stat-card--error    { border-left-color: var(--color-error); }
+
+.stat-card__label { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-gray-500); font-weight: 600; }
+.stat-card__value { font-family: var(--font-heading); font-size: var(--fs-4xl); letter-spacing: 0.02em; color: var(--color-dark); line-height: 1; }
+.stat-card__icon  { font-size: var(--fs-2xl); align-self: flex-end; margin-top: var(--sp-2); opacity: 0.4; }
+
+/* ── CHARTS GRID ─────────────────────────────────────────────── */
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-6);
+  margin-bottom: var(--sp-8);
+}
+
+.chart-card {
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  padding: var(--sp-6);
+}
+
+.chart-card--wide { grid-column: span 2; }
+
+.chart-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--sp-5);
+}
+
+.chart-card__title { font-family: var(--font-heading); font-size: var(--fs-xl); letter-spacing: 0.03em; color: var(--color-dark); }
+.chart-card__subtitle { font-size: var(--fs-xs); color: var(--color-gray-500); margin-top: var(--sp-1); }
+
+/* ── DATA TABLE ──────────────────────────────────────────────── */
+.data-table-wrapper {
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.data-table-header {
+  padding: var(--sp-5) var(--sp-6);
+  border-bottom: 1px solid var(--color-gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+}
+
+.data-table-header__title { font-family: var(--font-heading); font-size: var(--fs-xl); letter-spacing: 0.03em; color: var(--color-dark); }
+
+.data-table { width: 100%; border-collapse: collapse; }
+
+.data-table th {
+  text-align: left;
+  padding: var(--sp-3) var(--sp-4);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-gray-500);
+  background-color: var(--color-gray-100);
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.data-table td {
+  padding: var(--sp-4);
+  font-size: var(--fs-sm);
+  color: var(--color-dark);
+  border-bottom: 1px solid var(--color-gray-100);
+  vertical-align: middle;
+}
+
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background-color: var(--color-gray-100); }
+
+/* ── BADGES DE ESTADO ────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: capitalize;
+}
+
+.badge--nuevo      { background-color: #DBEAFE; color: #1D4ED8; }
+.badge--en_proceso { background-color: #FEF9C3; color: #92400E; }
+.badge--resuelto   { background-color: #DCFCE7; color: #15803D; }
+.badge--cerrado    { background-color: var(--color-gray-100); color: var(--color-gray-500); }
+
+/* ── SELECT ESTADO ───────────────────────────────────────────── */
+.select-estado {
+  padding: var(--sp-1) var(--sp-3);
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-xs);
+  font-family: var(--font-body);
+  background-color: var(--color-bg-alt);
+  color: var(--color-dark);
+  cursor: pointer;
+}
+
+/* ── ACTION BUTTONS ──────────────────────────────────────────── */
+.action-btn {
+  padding: var(--sp-1) var(--sp-3);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  transition: background-color var(--transition-fast);
+}
+
+.action-btn--danger { background-color: #FEE2E2; color: var(--color-error); }
+.action-btn--danger:hover { background-color: var(--color-error); color: #fff; }
+
+/* ── UTILIDADES ADMIN SIN INLINE STYLES ─────────────────────── */
+
+/* Permite que [hidden] funcione aunque .admin-layout tenga display:grid */
+.admin-layout[hidden] { display: none !important; }
+
+/* Icono del logo en sidebar */
+.sidebar__logo-icon { color: var(--color-accent); }
+
+/* Botones de la topbar */
+.topbar__theme-btn { color: var(--color-gray-700); }
+.topbar__menu-btn  { padding: var(--sp-2) var(--sp-3); border-radius: var(--radius-md); }
+
+/* Fila de acciones de tabla */
+.data-table-actions { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
+
+/* Wrapper de scroll horizontal para tablas */
+.table-scroll { overflow-x: auto; }
+
+/* Loader de tamaño pequeño dentro de cabecera de tabla */
+.loader--inline { padding: 0; }
+.loader__spinner--sm { width: 24px; height: 24px; border-width: 2px; }
+
+/* ── RESPONSIVE ADMIN ────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar--open { transform: translateX(0); }
+  .admin-main { margin-left: 0; }
+  .charts-grid { grid-template-columns: 1fr; }
+  .chart-card--wide { grid-column: span 1; }
+  .admin-panel { padding: var(--sp-4); }
+}
+
+@media (max-width: 640px) {
+  .stat-cards { grid-template-columns: 1fr 1fr; }
+  .topbar { padding: var(--sp-3) var(--sp-4); }
+  .data-table th:nth-child(n+4), .data-table td:nth-child(n+4) { display: none; }
+}

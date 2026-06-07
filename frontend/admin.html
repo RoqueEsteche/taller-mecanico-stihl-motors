@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Administrativo — PowerFix</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+
+  <!-- LOADING OVERLAY -->
+  <div id="authLoader" class="auth-loader">
+    <div class="auth-loader__brand">
+      Power<span>Fix</span>
+      <div class="loader__spinner"></div>
+    </div>
+  </div>
+
+  <div class="admin-layout" id="adminLayout" hidden>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Menú del panel">
+      <div class="sidebar__brand">
+        <div class="sidebar__logo">
+          <i class="fa-solid fa-wrench sidebar__logo-icon"></i>
+          Power<span class="sidebar__logo-accent">Fix</span>
+        </div>
+        <div class="sidebar__badge">Panel Administrativo</div>
+      </div>
+
+      <nav class="sidebar__nav">
+        <div class="sidebar__section-label">Principal</div>
+        <button type="button" class="sidebar__item sidebar__item--active" data-panel="dashboard">
+          <span class="sidebar__item-icon"><i class="fa-solid fa-gauge-high"></i></span>
+          Dashboard
+        </button>
+        <button type="button" class="sidebar__item" data-panel="contactos">
+          <span class="sidebar__item-icon"><i class="fa-solid fa-inbox"></i></span>
+          Contactos
+          <span class="sidebar__item-badge" id="contactosBadge">0</span>
+        </button>
+        <button type="button" class="sidebar__item" data-panel="servicios">
+          <span class="sidebar__item-icon"><i class="fa-solid fa-list"></i></span>
+          Servicios
+        </button>
+
+        <div class="sidebar__section-label">Analítica</div>
+        <button type="button" class="sidebar__item" data-panel="analytics">
+          <span class="sidebar__item-icon"><i class="fa-solid fa-chart-line"></i></span>
+          Visitas
+        </button>
+
+        <div class="sidebar__section-label">Sistema</div>
+        <a href="index.html" class="sidebar__item" target="_blank">
+          <span class="sidebar__item-icon"><i class="fa-solid fa-globe"></i></span>
+          Ver Sitio Web
+        </a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <div class="sidebar__user">
+          <div class="sidebar__user-avatar" id="userAvatar">A</div>
+          <div>
+            <div class="sidebar__user-name" id="userName">Admin</div>
+            <div class="sidebar__user-role" id="userRole">admin</div>
+          </div>
+          <button type="button" class="sidebar__logout" id="logoutBtn" aria-label="Cerrar sesión" title="Cerrar sesión">
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="admin-main">
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div class="topbar__left">
+          <div class="topbar__title" id="topbarTitle">Dashboard</div>
+          <div class="topbar__subtitle" id="topbarDate"></div>
+        </div>
+        <div class="topbar__right">
+          <button type="button" class="nav__theme-toggle topbar__theme-btn" id="themeToggle" aria-label="Cambiar tema">
+            <i class="fa-solid fa-sun" id="themeIcon"></i>
+          </button>
+          <button type="button" class="sidebar__item topbar__menu-btn" id="sidebarToggle" aria-label="Alternar sidebar" title="Menú">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- ── PANEL: DASHBOARD ────────────────────────────────── -->
+      <section class="admin-panel admin-panel--active" id="panel-dashboard" aria-label="Dashboard principal">
+
+        <div class="stat-cards">
+          <div class="stat-card">
+            <div class="stat-card__label">Total Contactos</div>
+            <div class="stat-card__value" id="statTotal">—</div>
+            <div class="stat-card__icon"><i class="fa-solid fa-inbox"></i></div>
+          </div>
+          <div class="stat-card stat-card--info">
+            <div class="stat-card__label">Nuevos</div>
+            <div class="stat-card__value" id="statNuevo">—</div>
+            <div class="stat-card__icon"><i class="fa-solid fa-star"></i></div>
+          </div>
+          <div class="stat-card stat-card--warning">
+            <div class="stat-card__label">En Proceso</div>
+            <div class="stat-card__value" id="statEnProceso">—</div>
+            <div class="stat-card__icon"><i class="fa-solid fa-gears"></i></div>
+          </div>
+          <div class="stat-card stat-card--success">
+            <div class="stat-card__label">Resueltos</div>
+            <div class="stat-card__value" id="statResuelto">—</div>
+            <div class="stat-card__icon"><i class="fa-solid fa-check-circle"></i></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">Servicios</div>
+            <div class="stat-card__value" id="statServicios">—</div>
+            <div class="stat-card__icon"><i class="fa-solid fa-list"></i></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">Visitas Totales</div>
+            <div class="stat-card__value" id="statVisitas">—</div>
+            <div class="stat-card__icon"><i class="fa-solid fa-eye"></i></div>
+          </div>
+        </div>
+
+        <div class="charts-grid">
+          <div class="chart-card">
+            <div class="chart-card__header">
+              <div>
+                <div class="chart-card__title">Consultas por Máquina</div>
+                <div class="chart-card__subtitle">Total de solicitudes por tipo de equipo</div>
+              </div>
+            </div>
+            <canvas id="chartMaquinas" height="280" aria-label="Gráfico de consultas por tipo de máquina" role="img"></canvas>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-card__header">
+              <div>
+                <div class="chart-card__title">Estado de Contactos</div>
+                <div class="chart-card__subtitle">Distribución por estado de seguimiento</div>
+              </div>
+            </div>
+            <canvas id="chartEstados" height="280" aria-label="Gráfico de distribución por estado" role="img"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── PANEL: CONTACTOS ────────────────────────────────── -->
+      <section class="admin-panel" id="panel-contactos" aria-label="Gestión de contactos">
+
+        <div class="data-table-wrapper">
+          <div class="data-table-header">
+            <div>
+              <div class="data-table-header__title">Contactos / Leads</div>
+            </div>
+            <div class="data-table-actions">
+              <select id="filtroEstado" class="select-estado" aria-label="Filtrar por estado">
+                <option value="">Todos los estados</option>
+                <option value="nuevo">Nuevo</option>
+                <option value="en_proceso">En Proceso</option>
+                <option value="resuelto">Resuelto</option>
+                <option value="cerrado">Cerrado</option>
+              </select>
+              <button type="button" class="btn btn--primary btn--sm" id="recargarContactos">
+                <i class="fa-solid fa-rotate-right"></i> Recargar
+              </button>
+            </div>
+          </div>
+
+          <div class="loader" id="contactosLoader">
+            <div class="loader__spinner"></div>
+          </div>
+
+          <div class="table-scroll">
+            <table class="data-table" id="contactosTable" aria-label="Tabla de contactos">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Cliente</th>
+                  <th>Máquina</th>
+                  <th>Email</th>
+                  <th>Teléfono</th>
+                  <th>Estado</th>
+                  <th>Fecha</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="contactosBody">
+                <!-- Cargado dinámicamente -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Modal detalle contacto -->
+        <div class="modal" id="contactoModal" role="dialog" aria-modal="true" aria-label="Detalle del contacto">
+          <div class="modal__overlay" id="modalOverlay"></div>
+          <div class="modal__content">
+            <button type="button" class="modal__close" id="modalClose" aria-label="Cerrar">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 class="modal__title">Detalle del Contacto</h3>
+            <div id="modalContent"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── PANEL: SERVICIOS ────────────────────────────────── -->
+      <section class="admin-panel" id="panel-servicios" aria-label="Gestión de servicios">
+
+        <div class="data-table-wrapper">
+          <div class="data-table-header">
+            <div class="data-table-header__title">Catálogo de Servicios</div>
+            <div class="loader loader--inline" id="serviciosLoader">
+              <div class="loader__spinner loader__spinner--sm"></div>
+            </div>
+          </div>
+
+          <div class="table-scroll">
+            <table class="data-table" id="serviciosTable" aria-label="Tabla de servicios">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Categoría</th>
+                  <th>Precio Base</th>
+                  <th>Tiempo Est.</th>
+                  <th>Disponible</th>
+                </tr>
+              </thead>
+              <tbody id="serviciosBody">
+                <!-- Cargado dinámicamente -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── PANEL: ANALYTICS ───────────────────────────────── -->
+      <section class="admin-panel" id="panel-analytics" aria-label="Analítica de visitas">
+        <div class="charts-grid">
+          <div class="chart-card chart-card--wide">
+            <div class="chart-card__header">
+              <div>
+                <div class="chart-card__title">Visitas por Página (Últimos 7 días)</div>
+                <div class="chart-card__subtitle">Registro de accesos por URL del sitio</div>
+              </div>
+            </div>
+            <canvas id="chartVisitas" height="200" aria-label="Gráfico de visitas por página" role="img"></canvas>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

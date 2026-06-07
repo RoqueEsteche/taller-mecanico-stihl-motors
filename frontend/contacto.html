@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto y Solicitud de Turno — PowerFix</title>
+  <meta name="description" content="Completá el formulario para solicitar un turno o consulta técnica. Respondemos en menos de 24 horas." />
+  <!-- Open Graph -->
+  <meta property="og:title"       content="Contacto — PowerFix Taller Mecánico" />
+  <meta property="og:description" content="Solicitá un turno de reparación o hacenos tu consulta técnica." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:image"       content="/assets/images/og-image.webp" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- COOKIE BANNER -->
+  <aside class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Configuración de cookies">
+    <p class="cookie-banner__title"><i class="fa-solid fa-cookie-bite"></i> Configuración de Cookies</p>
+    <p class="cookie-banner__text">Usamos cookies para mejorar tu experiencia. <a href="terminos.html">Saber más</a>.</p>
+    <div class="cookie-banner__actions">
+      <button type="button" class="btn btn--primary btn--sm" id="cookieAccept">Aceptar</button>
+      <button type="button" class="btn btn--ghost-light btn--sm" id="cookieReject">Rechazar</button>
+    </div>
+  </aside>
+
+  <!-- NAVEGACIÓN -->
+  <header role="banner">
+    <nav class="nav nav--scrolled" id="mainNav" role="navigation" aria-label="Navegación principal">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo" aria-label="PowerFix — Inicio">
+          Power<span class="nav__logo-accent">Fix</span>
+        </a>
+        <ul class="nav__menu" id="navMenu" role="menubar">
+          <li class="nav__item" role="none"><a href="index.html"      class="nav__link" role="menuitem">Inicio</a></li>
+          <li class="nav__item" role="none"><a href="servicios.html"  class="nav__link" role="menuitem">Servicios</a></li>
+          <li class="nav__item" role="none"><a href="contacto.html"   class="nav__link nav__link--active" role="menuitem">Contacto</a></li>
+          <li class="nav__item" role="none"><a href="contacto.html"   class="nav__cta"  role="menuitem">Solicitar Turno</a></li>
+        </ul>
+        <div class="nav__actions">
+          <button type="button" class="nav__theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+            <i class="fa-solid fa-sun" id="themeIcon"></i>
+          </button>
+          <button type="button" class="nav__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+            <span class="nav__toggle-bar"></span>
+            <span class="nav__toggle-bar"></span>
+            <span class="nav__toggle-bar"></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- PAGE HERO -->
+    <section class="page-hero" aria-label="Encabezado de contacto">
+      <div class="container">
+        <nav class="page-hero__breadcrumb" aria-label="Miga de pan">
+          <a href="index.html">Inicio</a>
+          <i class="fa-solid fa-chevron-right breadcrumb__sep"></i>
+          <span>Contacto</span>
+        </nav>
+        <h1 class="page-hero__title">Solicitá tu Turno</h1>
+        <p class="page-hero__subtitle">Contanos qué necesita tu máquina. Te respondemos en menos de 24 horas con un presupuesto sin cargo.</p>
+      </div>
+    </section>
+
+    <!-- CONTACTO LAYOUT -->
+    <section class="section" aria-label="Formulario de contacto">
+      <div class="container">
+        <div class="contact-layout">
+
+          <!-- FORMULARIO -->
+          <article class="page-form" aria-label="Formulario de solicitud">
+            <h2 class="page-form__title">Enviá tu Consulta</h2>
+            <p class="page-form__subtitle">Todos los campos marcados con * son obligatorios.</p>
+
+            <div class="alert alert--success" id="formSuccess" role="alert" aria-live="polite">
+              <span class="alert__icon"><i class="fa-solid fa-circle-check"></i></span>
+              <div>
+                <strong>¡Consulta enviada con éxito!</strong><br>
+                Te contactaremos en menos de 24 horas para coordinar el servicio.
+              </div>
+            </div>
+
+            <div class="alert alert--error" id="formError" role="alert" aria-live="polite">
+              <span class="alert__icon"><i class="fa-solid fa-circle-xmark"></i></span>
+              <div id="formErrorMsg">Ocurrió un error. Por favor, intentá nuevamente.</div>
+            </div>
+
+            <form id="contactForm" novalidate aria-label="Formulario de contacto">
+              <div class="form__row">
+                <div class="form__group">
+                  <label class="form__label form__label--required" for="nombre">Nombre</label>
+                  <input type="text" id="nombre" name="nombre" class="form__input"
+                    placeholder="Tu nombre" autocomplete="given-name"
+                    required minlength="2" maxlength="100" aria-required="true" />
+                  <span class="form__error" id="nombreError" aria-live="polite">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Ingresá tu nombre (mínimo 2 caracteres).
+                  </span>
+                </div>
+
+                <div class="form__group">
+                  <label class="form__label form__label--required" for="apellido">Apellido</label>
+                  <input type="text" id="apellido" name="apellido" class="form__input"
+                    placeholder="Tu apellido" autocomplete="family-name"
+                    required minlength="2" maxlength="100" aria-required="true" />
+                  <span class="form__error" id="apellidoError" aria-live="polite">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Ingresá tu apellido.
+                  </span>
+                </div>
+              </div>
+
+              <div class="form__row">
+                <div class="form__group">
+                  <label class="form__label form__label--required" for="email">Correo Electrónico</label>
+                  <input type="email" id="email" name="email" class="form__input"
+                    placeholder="tu@correo.com" autocomplete="email"
+                    required aria-required="true" />
+                  <span class="form__error" id="emailError" aria-live="polite">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Ingresá un email válido.
+                  </span>
+                </div>
+
+                <div class="form__group">
+                  <label class="form__label form__label--required" for="telefono">Teléfono</label>
+                  <input type="tel" id="telefono" name="telefono" class="form__input"
+                    placeholder="381 400-1234" autocomplete="tel"
+                    required minlength="6" maxlength="20" aria-required="true" />
+                  <span class="form__error" id="telefonoError" aria-live="polite">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Ingresá un teléfono válido.
+                  </span>
+                </div>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label form__label--required" for="tipo_maquina">Tipo de Máquina</label>
+                <select id="tipo_maquina" name="tipo_maquina" class="form__select" required aria-required="true">
+                  <option value="">— Seleccioná tu equipo —</option>
+                  <option value="Desmalezadora">Desmalezadora</option>
+                  <option value="Motosierra">Motosierra</option>
+                  <option value="Cortacésped (empuje)">Cortacésped (empuje)</option>
+                  <option value="Tractor Cortacésped">Tractor Cortacésped</option>
+                  <option value="Sopladora">Sopladora</option>
+                  <option value="Fumigadora">Fumigadora</option>
+                  <option value="Generador">Generador</option>
+                  <option value="Motobomba de Agua">Motobomba de Agua</option>
+                  <option value="Motor Estacionario">Motor Estacionario</option>
+                  <option value="Otro">Otro equipo</option>
+                </select>
+                <span class="form__error" id="maquinaError" aria-live="polite">
+                  <i class="fa-solid fa-triangle-exclamation"></i> Seleccioná el tipo de máquina.
+                </span>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label form__label--required" for="descripcion">Descripción del Problema</label>
+                <textarea id="descripcion" name="descripcion" class="form__textarea"
+                  placeholder="Describí el problema: síntomas, desde cuándo ocurre, marca y modelo si lo sabés..."
+                  required minlength="10" aria-required="true"></textarea>
+                <span class="form__hint" id="descCount">0 / 500 caracteres</span>
+                <span class="form__error" id="descripcionError" aria-live="polite">
+                  <i class="fa-solid fa-triangle-exclamation"></i> Describí el problema con al menos 10 caracteres.
+                </span>
+              </div>
+
+              <div class="form__group">
+                <div class="form__check">
+                  <input type="checkbox" id="terminos" name="terminos" class="form__check-input" required aria-required="true" />
+                  <label class="form__check-label" for="terminos">
+                    Acepto los <a href="terminos.html" target="_blank">Términos y Condiciones</a>
+                    y la <a href="terminos.html#privacidad" target="_blank">Política de Privacidad</a> de PowerFix.
+                  </label>
+                </div>
+                <span class="form__error" id="terminosError" aria-live="polite">
+                  <i class="fa-solid fa-triangle-exclamation"></i> Debés aceptar los términos para continuar.
+                </span>
+              </div>
+
+              <button type="submit" class="btn btn--primary btn--full btn--lg" id="submitBtn">
+                <i class="fa-solid fa-paper-plane"></i>
+                <span id="submitText">Enviar Consulta</span>
+              </button>
+            </form>
+          </article>
+
+          <!-- INFORMACIÓN DE CONTACTO -->
+          <aside class="contact-info-card" aria-label="Información de contacto">
+            <h2 class="contact-info-card__title">Información de Contacto</h2>
+
+            <div class="contact-info-item">
+              <div class="contact-info-item__icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div>
+                <div class="contact-info-item__label">Dirección</div>
+                <div class="contact-info-item__text">
+                  Av. Independencia 1420<br>San Miguel de Tucumán, Argentina
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-item__icon"><i class="fa-solid fa-phone"></i></div>
+              <div>
+                <div class="contact-info-item__label">Teléfono</div>
+                <div class="contact-info-item__text">
+                  <a href="tel:+543814001234" class="contact-info-item__link">+54 381 400-1234</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-item__icon"><i class="fa-brands fa-whatsapp"></i></div>
+              <div>
+                <div class="contact-info-item__label">WhatsApp</div>
+                <div class="contact-info-item__text">
+                  <a href="https://wa.me/543814001234" target="_blank" class="contact-info-item__link">+54 381 400-1234</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-item__icon"><i class="fa-solid fa-envelope"></i></div>
+              <div>
+                <div class="contact-info-item__label">Email</div>
+                <div class="contact-info-item__text">
+                  <a href="mailto:info@powerfix.com" class="contact-info-item__link">info@powerfix.com</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-item__icon"><i class="fa-solid fa-clock"></i></div>
+              <div>
+                <div class="contact-info-item__label">Horario de Atención</div>
+                <div class="contact-info-item__text">
+                  Lun — Vie: 8:00 — 18:00<br>
+                  Sábado: 8:00 — 13:00
+                </div>
+              </div>
+            </div>
+
+            <hr class="divider" />
+
+            <div class="contact-promo">
+              <h3 class="contact-promo__title">
+                <i class="fa-solid fa-star"></i> Diagnóstico Gratuito
+              </h3>
+              <p class="contact-promo__text">
+                Evaluamos tu equipo sin costo y te damos el presupuesto antes de comenzar cualquier trabajo.
+              </p>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__brand-logo">Power<span>Fix</span></div>
+          <p class="footer__brand-tagline">Tu taller de confianza para toda clase de maquinaria. Más de 15 años de experiencia.</p>
+          <div class="footer__social">
+            <a href="#" class="footer__social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="footer__social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="footer__social-link" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <nav aria-label="Servicios">
+          <h3 class="footer__nav-title">Servicios</h3>
+          <ul class="footer__nav-list">
+            <li><a href="servicios.html" class="footer__nav-link">Ver Catálogo</a></li>
+            <li><a href="contacto.html"  class="footer__nav-link">Solicitar Turno</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-label="Empresa">
+          <h3 class="footer__nav-title">Empresa</h3>
+          <ul class="footer__nav-list">
+            <li><a href="index.html"    class="footer__nav-link">Inicio</a></li>
+            <li><a href="terminos.html" class="footer__nav-link">Términos</a></li>
+          </ul>
+        </nav>
+
+        <address class="footer__address">
+          <h3 class="footer__nav-title">Contacto</h3>
+          <ul class="footer__nav-list">
+            <li class="footer__contact-item footer__contact-item--center">
+              <i class="fa-solid fa-phone footer__contact-icon--inline"></i>
+              <a href="tel:+543814001234" class="footer__nav-link">+54 381 400-1234</a>
+            </li>
+          </ul>
+        </address>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>© 2024 PowerFix Taller Mecánico. Todos los derechos reservados.</p>
+        <div class="footer__bottom-links">
+          <a href="terminos.html">Términos y Condiciones</a>
+          <a href="login.html">Admin</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/contacto.js"></script>
+</body>
+</html>

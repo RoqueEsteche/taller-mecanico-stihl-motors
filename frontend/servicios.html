@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo de Servicios — PowerFix Taller Mecánico</title>
+  <meta name="description" content="Catálogo completo de servicios de reparación y mantenimiento: desmalezadoras, motosierras, generadores, motobombas, fumigadoras, tractores cortacésped y más." />
+  <!-- Open Graph -->
+  <meta property="og:title"       content="Catálogo de Servicios — PowerFix" />
+  <meta property="og:description" content="Toda la maquinaria a nafta y diesel. Presupuesto sin cargo." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:image"       content="/assets/images/og-image.webp" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- COOKIE BANNER -->
+  <aside class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Configuración de cookies">
+    <p class="cookie-banner__title"><i class="fa-solid fa-cookie-bite"></i> Configuración de Cookies</p>
+    <p class="cookie-banner__text">Usamos cookies para mejorar tu experiencia. <a href="terminos.html">Saber más</a>.</p>
+    <div class="cookie-banner__actions">
+      <button type="button" class="btn btn--primary btn--sm" id="cookieAccept">Aceptar</button>
+      <button type="button" class="btn btn--ghost-light btn--sm" id="cookieReject">Rechazar</button>
+    </div>
+  </aside>
+
+  <!-- NAVEGACIÓN -->
+  <header role="banner">
+    <nav class="nav nav--scrolled" id="mainNav" role="navigation" aria-label="Navegación principal">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo" aria-label="PowerFix — Inicio">
+          Power<span class="nav__logo-accent">Fix</span>
+        </a>
+
+        <ul class="nav__menu" id="navMenu" role="menubar">
+          <li class="nav__item" role="none"><a href="index.html"      class="nav__link" role="menuitem">Inicio</a></li>
+          <li class="nav__item" role="none"><a href="servicios.html"  class="nav__link nav__link--active" role="menuitem">Servicios</a></li>
+          <li class="nav__item" role="none"><a href="contacto.html"   class="nav__link" role="menuitem">Contacto</a></li>
+          <li class="nav__item" role="none"><a href="contacto.html"   class="nav__cta"  role="menuitem">Solicitar Turno</a></li>
+        </ul>
+
+        <div class="nav__actions">
+          <button type="button" class="nav__theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+            <i class="fa-solid fa-sun" id="themeIcon"></i>
+          </button>
+          <button type="button" class="nav__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+            <span class="nav__toggle-bar"></span>
+            <span class="nav__toggle-bar"></span>
+            <span class="nav__toggle-bar"></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- PAGE HERO -->
+    <section class="page-hero" aria-label="Encabezado de servicios">
+      <div class="container">
+        <nav class="page-hero__breadcrumb" aria-label="Miga de pan">
+          <a href="index.html">Inicio</a>
+          <i class="fa-solid fa-chevron-right breadcrumb__sep"></i>
+          <span>Servicios</span>
+        </nav>
+        <h1 class="page-hero__title">Catálogo de Servicios</h1>
+        <p class="page-hero__subtitle">
+          Reparamos toda clase de maquinaria. Encontrá el servicio que necesitás
+          y solicitá un turno sin cargo.
+        </p>
+      </div>
+    </section>
+
+    <!-- CATÁLOGO -->
+    <section class="section" aria-label="Catálogo de servicios">
+      <div class="container">
+
+        <!-- Filtros -->
+        <div class="filter" id="filterContainer" role="group" aria-label="Filtrar por categoría">
+          <button type="button" class="filter__btn filter__btn--active" data-categoria="">Todos</button>
+          <button type="button" class="filter__btn" data-categoria="Jardinería">
+            <i class="fa-solid fa-leaf"></i> Jardinería
+          </button>
+          <button type="button" class="filter__btn" data-categoria="Forestal">
+            <i class="fa-solid fa-tree"></i> Forestal
+          </button>
+          <button type="button" class="filter__btn" data-categoria="Agricultura">
+            <i class="fa-solid fa-tractor"></i> Agricultura
+          </button>
+          <button type="button" class="filter__btn" data-categoria="Energía">
+            <i class="fa-solid fa-bolt"></i> Energía
+          </button>
+          <button type="button" class="filter__btn" data-categoria="Agua">
+            <i class="fa-solid fa-droplet"></i> Agua
+          </button>
+        </div>
+
+        <!-- Loader -->
+        <div class="loader" id="catalogLoader" aria-live="polite" aria-label="Cargando servicios">
+          <div class="loader__spinner" role="status"></div>
+        </div>
+
+        <!-- Grid de servicios -->
+        <div class="services-grid" id="catalogGrid" aria-live="polite">
+          <!-- Cargado dinámicamente por servicios.js -->
+        </div>
+
+        <!-- Sin resultados -->
+        <div id="noResults" class="no-results" hidden>
+          <i class="fa-solid fa-circle-exclamation no-results__icon"></i>
+          <h3 class="no-results__title">Sin servicios en esta categoría</h3>
+          <p class="no-results__text">Volvé a cargar o consultanos directamente.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-banner" aria-label="Solicitar servicio">
+      <div class="container">
+        <div class="cta-banner__content">
+          <h2 class="cta-banner__title">¿No Encontrás tu Máquina?</h2>
+          <p class="cta-banner__subtitle">Reparamos cualquier equipo. Consultanos y te damos un presupuesto.</p>
+          <div class="cta-banner__actions">
+            <a href="contacto.html" class="btn btn--primary btn--lg">
+              <i class="fa-solid fa-comments"></i> Consultar Ahora
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__brand-logo">Power<span>Fix</span></div>
+          <p class="footer__brand-tagline">Tu taller de confianza para toda clase de maquinaria. Más de 15 años de experiencia.</p>
+          <div class="footer__social">
+            <a href="#" class="footer__social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="footer__social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="footer__social-link" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <nav aria-label="Servicios">
+          <h3 class="footer__nav-title">Servicios</h3>
+          <ul class="footer__nav-list">
+            <li><a href="servicios.html" class="footer__nav-link">Desmalezadoras</a></li>
+            <li><a href="servicios.html" class="footer__nav-link">Motosierras</a></li>
+            <li><a href="servicios.html" class="footer__nav-link">Generadores</a></li>
+            <li><a href="servicios.html" class="footer__nav-link">Motobombas</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-label="Empresa">
+          <h3 class="footer__nav-title">Empresa</h3>
+          <ul class="footer__nav-list">
+            <li><a href="index.html"     class="footer__nav-link">Inicio</a></li>
+            <li><a href="contacto.html"  class="footer__nav-link">Contacto</a></li>
+            <li><a href="terminos.html"  class="footer__nav-link">Términos</a></li>
+          </ul>
+        </nav>
+
+        <address class="footer__address">
+          <h3 class="footer__nav-title">Contacto</h3>
+          <ul class="footer__nav-list">
+            <li class="footer__contact-item">
+              <i class="fa-solid fa-location-dot footer__contact-icon"></i>
+              <span class="footer__nav-link">Av. Independencia 1420, Tucumán</span>
+            </li>
+            <li class="footer__contact-item footer__contact-item--center">
+              <i class="fa-solid fa-phone footer__contact-icon--inline"></i>
+              <a href="tel:+543814001234" class="footer__nav-link">+54 381 400-1234</a>
+            </li>
+          </ul>
+        </address>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>© 2024 PowerFix Taller Mecánico. Todos los derechos reservados.</p>
+        <div class="footer__bottom-links">
+          <a href="terminos.html">Términos y Condiciones</a>
+          <a href="login.html">Admin</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/servicios.js"></script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PowerFix — Taller Mecánico Especializado | Reparación de Máquinas</title>
+  <meta name="description" content="PowerFix es el taller mecánico especializado en reparación y mantenimiento de desmalezadoras, motosierras, generadores, motobombas, cortacéspedes y toda clase de maquinaria a nafta y diesel." />
+  <meta name="keywords" content="taller mecánico, reparación desmalezadora, motosierra, generador, motobomba, cortacésped, fumigadora, motor estacionario" />
+  <meta name="author" content="PowerFix Taller Mecánico" />
+  <!-- Open Graph -->
+  <meta property="og:title"       content="PowerFix — Tu Máquina. Nuestra Pasión." />
+  <meta property="og:description" content="Taller mecánico especializado en toda clase de maquinaria a nafta y diesel. Diagnóstico gratuito, repuestos originales y garantía de trabajo." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:image"       content="/assets/images/og-image.webp" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- COOKIE BANNER -->
+  <aside class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Configuración de cookies">
+    <p class="cookie-banner__title"><i class="fa-solid fa-cookie-bite"></i> Configuración de Cookies</p>
+    <p class="cookie-banner__text">
+      Usamos cookies para mejorar tu experiencia y analizar el tráfico del sitio.
+      Consulta nuestra <a href="terminos.html">Política de Privacidad</a>.
+    </p>
+    <div class="cookie-banner__actions">
+      <button type="button" class="btn btn--primary btn--sm" id="cookieAccept">Aceptar todas</button>
+      <button type="button" class="btn btn--ghost-light btn--sm" id="cookieReject">Solo esenciales</button>
+    </div>
+  </aside>
+
+  <!-- NAVEGACIÓN -->
+  <header role="banner">
+    <nav class="nav" id="mainNav" role="navigation" aria-label="Navegación principal">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo" aria-label="PowerFix — Inicio">
+          Power<span class="nav__logo-accent">Fix</span>
+        </a>
+
+        <ul class="nav__menu" id="navMenu" role="menubar">
+          <li class="nav__item" role="none">
+            <a href="index.html"      class="nav__link nav__link--active" role="menuitem">Inicio</a>
+          </li>
+          <li class="nav__item" role="none">
+            <a href="servicios.html"  class="nav__link" role="menuitem">Servicios</a>
+          </li>
+          <li class="nav__item" role="none">
+            <a href="contacto.html"   class="nav__link" role="menuitem">Contacto</a>
+          </li>
+          <li class="nav__item" role="none">
+            <a href="contacto.html"   class="nav__cta"  role="menuitem">Solicitar Turno</a>
+          </li>
+        </ul>
+
+        <div class="nav__actions">
+          <button type="button" class="nav__theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+            <i class="fa-solid fa-sun" id="themeIcon"></i>
+          </button>
+          <button type="button" class="nav__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+            <span class="nav__toggle-bar"></span>
+            <span class="nav__toggle-bar"></span>
+            <span class="nav__toggle-bar"></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" aria-label="Sección principal">
+      <div class="hero__bg" role="img" aria-label="Taller mecánico profesional"></div>
+      <div class="container">
+        <div class="hero__content">
+          <div class="hero__badge">
+            <i class="fa-solid fa-circle hero__badge-dot"></i>
+            Taller Mecánico Especializado · Desde 2008
+          </div>
+          <h1 class="hero__title">
+            Tu Máquina<br>
+            en Manos<br>
+            <span class="hero__title-accent">Expertas.</span>
+          </h1>
+          <p class="hero__subtitle">
+            Reparamos y mantenemos toda clase de maquinaria a nafta y diesel:
+            desmalezadoras, motosierras, generadores, motobombas y más.
+            <strong class="hero__highlight">Diagnóstico gratuito.</strong>
+          </p>
+          <div class="hero__cta">
+            <a href="contacto.html" class="btn btn--primary btn--lg">
+              <i class="fa-solid fa-wrench"></i> Solicitar Servicio
+            </a>
+            <a href="servicios.html" class="btn btn--ghost-light btn--lg">
+              Ver Catálogo <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+          <div class="hero__scroll">
+            <div class="hero__scroll-line"></div>
+            Desplazá para explorar
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ESTADÍSTICAS -->
+    <section class="stats" aria-label="Números que nos respaldan">
+      <div class="container">
+        <div class="stats__grid">
+          <div class="stats__item">
+            <div class="stats__number">+15</div>
+            <div class="stats__label">Años de Experiencia</div>
+          </div>
+          <div class="stats__item">
+            <div class="stats__number">+3K</div>
+            <div class="stats__label">Máquinas Reparadas</div>
+          </div>
+          <div class="stats__item">
+            <div class="stats__number">98%</div>
+            <div class="stats__label">Clientes Satisfechos</div>
+          </div>
+          <div class="stats__item">
+            <div class="stats__number">9</div>
+            <div class="stats__label">Categorías de Servicio</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICIOS DESTACADOS -->
+    <section class="section" aria-label="Nuestros servicios">
+      <div class="container">
+        <header class="section__header">
+          <span class="section__eyebrow">Lo que hacemos</span>
+          <h2 class="section__title">Especialistas en Todo Tipo de Maquinaria</h2>
+          <p class="section__subtitle">
+            Desde pequeños equipos domésticos hasta maquinaria agrícola e industrial.
+            Nafta o diesel, 2T o 4T — lo reparamos.
+          </p>
+        </header>
+
+        <div class="services-grid">
+          <article class="feature-card">
+            <div class="feature-card__icon"><i class="fa-solid fa-leaf"></i></div>
+            <h3 class="feature-card__title">Desmalezadoras</h3>
+            <p class="feature-card__desc">Carburador, bujía, filtros, sistema de corte. Devolvemos el máximo rendimiento.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-card__icon"><i class="fa-solid fa-tree"></i></div>
+            <h3 class="feature-card__title">Motosierras</h3>
+            <p class="feature-card__desc">Afilado de cadena, ajuste de carburador, freno y embrague. Profesionales y domésticas.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-card__icon"><i class="fa-solid fa-cut"></i></div>
+            <h3 class="feature-card__title">Cortacéspedes</h3>
+            <p class="feature-card__desc">Desde modelos de empuje hasta tractores cortacésped. Afilado y balanceo de cuchilla.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-card__icon"><i class="fa-solid fa-bolt"></i></div>
+            <h3 class="feature-card__title">Generadores</h3>
+            <p class="feature-card__desc">Revisión de AVR, alternador y motor. Prueba de carga para garantizar rendimiento pleno.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-card__icon"><i class="fa-solid fa-droplet"></i></div>
+            <h3 class="feature-card__title">Motobombas</h3>
+            <p class="feature-card__desc">Impeller, sello mecánico y motor. Recuperamos el caudal y la presión originales.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-card__icon"><i class="fa-solid fa-spray-can-sparkles"></i></div>
+            <h3 class="feature-card__title">Fumigadoras</h3>
+            <p class="feature-card__desc">Bomba, mangueras y lanzas. Ajuste de presión y caudal para máxima eficiencia agrícola.</p>
+          </article>
+        </div>
+
+        <div class="section__cta">
+          <a href="servicios.html" class="btn btn--secondary btn--lg">
+            Ver Todos los Servicios <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CÓMO FUNCIONA -->
+    <section class="section section--dark" aria-label="Proceso de servicio">
+      <div class="container">
+        <header class="section__header">
+          <span class="section__eyebrow section__eyebrow--on-dark">Simple y transparente</span>
+          <h2 class="section__title">¿Cómo Funciona?</h2>
+          <p class="section__subtitle">En 3 pasos tu máquina vuelve a rendir al 100%.</p>
+        </header>
+        <div class="steps">
+          <div class="steps__grid">
+            <div class="steps__item">
+              <div class="steps__number">1</div>
+              <h3 class="steps__title">Traé tu Máquina</h3>
+              <p class="steps__desc">Acercate al taller o coordiná el retiro a domicilio. Sin turnos, sin esperas largas.</p>
+            </div>
+            <div class="steps__item">
+              <div class="steps__number">2</div>
+              <h3 class="steps__title">Diagnóstico Gratuito</h3>
+              <p class="steps__desc">Nuestros técnicos evalúan el equipo sin costo y te informamos el presupuesto antes de comenzar.</p>
+            </div>
+            <div class="steps__item">
+              <div class="steps__number">3</div>
+              <h3 class="steps__title">Retirá y Trabajá</h3>
+              <p class="steps__desc">Entregamos en el tiempo acordado con garantía escrita. Tu máquina lista para trabajar.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section class="section" aria-label="Opiniones de clientes">
+      <div class="container">
+        <header class="section__header">
+          <span class="section__eyebrow">Lo que dicen nuestros clientes</span>
+          <h2 class="section__title">Resultados que Hablan</h2>
+        </header>
+        <div class="services-grid">
+          <blockquote class="testimonial">
+            <div class="testimonial__stars">★★★★★</div>
+            <p class="testimonial__text">"Llevé mi motosierra que no arrancaba hace meses. En 2 días me la devolvieron como nueva, con un diagnóstico claro y precio justo."</p>
+            <footer class="testimonial__author">
+              <div class="testimonial__avatar">RM</div>
+              <div>
+                <div class="testimonial__name">Roberto Méndez</div>
+                <div class="testimonial__job">Productor Forestal</div>
+              </div>
+            </footer>
+          </blockquote>
+          <blockquote class="testimonial">
+            <div class="testimonial__stars">★★★★★</div>
+            <p class="testimonial__text">"Mi generador falló en plena cosecha. PowerFix lo solucionó en el día. Excelente atención, muy profesionales."</p>
+            <footer class="testimonial__author">
+              <div class="testimonial__avatar">AG</div>
+              <div>
+                <div class="testimonial__name">Ana García</div>
+                <div class="testimonial__job">Productora Agrícola</div>
+              </div>
+            </footer>
+          </blockquote>
+          <blockquote class="testimonial">
+            <div class="testimonial__stars">★★★★★</div>
+            <p class="testimonial__text">"Servicio de primera. Llevé el tractor cortacésped con problemas de transmisión y quedó impecable. 100% recomendable."</p>
+            <footer class="testimonial__author">
+              <div class="testimonial__avatar">CL</div>
+              <div>
+                <div class="testimonial__name">Carlos López</div>
+                <div class="testimonial__job">Encargado de Parques</div>
+              </div>
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="cta-banner" aria-label="Llamado a la acción">
+      <div class="container">
+        <div class="cta-banner__content">
+          <h2 class="cta-banner__title">¿Tu Máquina Falla?<br>Nosotros la Solucionamos.</h2>
+          <p class="cta-banner__subtitle">Contanos el problema y te respondemos en menos de 24 horas.</p>
+          <div class="cta-banner__actions">
+            <a href="contacto.html" class="btn btn--primary btn--lg">
+              <i class="fa-solid fa-envelope"></i> Enviar Consulta
+            </a>
+            <a href="servicios.html" class="btn btn--ghost-light btn--lg">Ver Servicios</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__brand-logo">Power<span>Fix</span></div>
+          <p class="footer__brand-tagline">Tu taller de confianza para toda clase de maquinaria a nafta y diesel. Más de 15 años de experiencia.</p>
+          <div class="footer__social">
+            <a href="#" class="footer__social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="footer__social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="footer__social-link" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <nav aria-label="Servicios">
+          <h3 class="footer__nav-title">Servicios</h3>
+          <ul class="footer__nav-list">
+            <li><a href="servicios.html" class="footer__nav-link">Desmalezadoras</a></li>
+            <li><a href="servicios.html" class="footer__nav-link">Motosierras</a></li>
+            <li><a href="servicios.html" class="footer__nav-link">Generadores</a></li>
+            <li><a href="servicios.html" class="footer__nav-link">Motobombas</a></li>
+            <li><a href="servicios.html" class="footer__nav-link">Fumigadoras</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-label="Empresa">
+          <h3 class="footer__nav-title">Empresa</h3>
+          <ul class="footer__nav-list">
+            <li><a href="index.html"     class="footer__nav-link">Inicio</a></li>
+            <li><a href="servicios.html" class="footer__nav-link">Catálogo</a></li>
+            <li><a href="contacto.html"  class="footer__nav-link">Contacto</a></li>
+            <li><a href="terminos.html"  class="footer__nav-link">Términos y Condiciones</a></li>
+          </ul>
+        </nav>
+
+        <address class="footer__address">
+          <h3 class="footer__nav-title">Contacto</h3>
+          <ul class="footer__nav-list">
+            <li class="footer__contact-item">
+              <i class="fa-solid fa-location-dot footer__contact-icon"></i>
+              <span class="footer__nav-link">Av. Independencia 1420, Tucumán</span>
+            </li>
+            <li class="footer__contact-item footer__contact-item--center">
+              <i class="fa-solid fa-phone footer__contact-icon--inline"></i>
+              <a href="tel:+543814001234" class="footer__nav-link">+54 381 400-1234</a>
+            </li>
+            <li class="footer__contact-item footer__contact-item--center">
+              <i class="fa-solid fa-envelope footer__contact-icon--inline"></i>
+              <a href="mailto:info@powerfix.com" class="footer__nav-link">info@powerfix.com</a>
+            </li>
+            <li class="footer__contact-item footer__contact-item--center">
+              <i class="fa-solid fa-clock footer__contact-icon--inline"></i>
+              <span class="footer__nav-link">Lun–Vie 8:00–18:00</span>
+            </li>
+          </ul>
+        </address>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>© 2024 PowerFix Taller Mecánico. Todos los derechos reservados.</p>
+        <div class="footer__bottom-links">
+          <a href="terminos.html">Términos y Condiciones</a>
+          <a href="terminos.html#privacidad">Política de Privacidad</a>
+          <a href="login.html">Admin</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
