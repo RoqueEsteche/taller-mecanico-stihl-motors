@@ -164,22 +164,22 @@ async function loadContactos(estado = '') {
     const contactos = await res.json();
 
     if (contactos.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--color-gray-500)">Sin contactos registrados.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="8" class="td-empty">Sin contactos registrados.</td></tr>`;
       return;
     }
 
     contactos.forEach(c => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td style="color:var(--color-gray-500)">#${c.id}</td>
+        <td class="td-muted">#${c.id}</td>
         <td><strong>${c.nombre} ${c.apellido}</strong></td>
         <td>${c.tipo_maquina}</td>
         <td>${c.email}</td>
         <td>${c.telefono}</td>
         <td><span class="badge badge--${c.estado}">${c.estado.replace('_', ' ')}</span></td>
         <td>${window.PF.formatDate(c.created_at)}</td>
-        <td style="display:flex;gap:.5rem;flex-wrap:wrap">
-          <button class="btn btn--sm" style="background:var(--color-gray-100);color:var(--color-dark)" data-id="${c.id}" data-action="ver">
+        <td class="td-actions">
+          <button type="button" class="btn btn--sm btn--view" data-id="${c.id}" data-action="ver">
             <i class="fa-solid fa-eye"></i>
           </button>
           <select class="select-estado" data-id="${c.id}" data-action="estado" aria-label="Cambiar estado del contacto ${c.id}">
@@ -199,7 +199,7 @@ async function loadContactos(estado = '') {
     tbody.addEventListener('change', handleContactoAction);
 
   } catch (err) {
-    tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--color-error);padding:1.5rem">Error al cargar contactos.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="8" class="td-error">Error al cargar contactos. Verificá que el servidor esté activo.</td></tr>`;
   } finally {
     loader?.classList.remove('loader--visible');
   }
@@ -260,13 +260,13 @@ async function loadServicios() {
     servicios.forEach(s => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td style="color:var(--color-gray-500)">#${s.id}</td>
+        <td class="td-muted">#${s.id}</td>
         <td><strong>${s.nombre}</strong></td>
         <td><span class="badge badge--${s.categoria === 'Jardinería' ? 'resuelto' : s.categoria === 'Energía' ? 'nuevo' : 'en_proceso'}">${s.categoria}</span></td>
         <td>${window.PF.formatPrice(s.precio_base)}</td>
         <td>${s.tiempo_estimado || '—'}</td>
         <td>
-          <span style="color:${s.disponible ? 'var(--color-success)' : 'var(--color-error)'}">
+          <span class="td-status ${s.disponible ? 'td-status--ok' : 'td-status--off'}">
             <i class="fa-solid fa-${s.disponible ? 'check-circle' : 'times-circle'}"></i>
             ${s.disponible ? 'Activo' : 'Inactivo'}
           </span>
@@ -274,7 +274,7 @@ async function loadServicios() {
       tbody.appendChild(tr);
     });
   } catch (err) {
-    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--color-error);padding:1.5rem">Error al cargar servicios.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="6" class="td-error">Error al cargar servicios. Verificá que el servidor esté activo.</td></tr>`;
   } finally {
     loader?.classList.remove('loader--visible');
   }
@@ -287,24 +287,36 @@ function openModal(contacto) {
   if (!modal || !content || !contacto) return;
 
   content.innerHTML = `
-    <div style="display:grid;gap:var(--sp-4)">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4)">
-        <div><span style="font-size:var(--fs-xs);color:var(--color-gray-500);text-transform:uppercase;letter-spacing:.08em">Cliente</span>
-             <p style="font-weight:600;margin-top:2px">${contacto.nombre} ${contacto.apellido}</p></div>
-        <div><span style="font-size:var(--fs-xs);color:var(--color-gray-500);text-transform:uppercase;letter-spacing:.08em">Máquina</span>
-             <p style="font-weight:600;margin-top:2px">${contacto.tipo_maquina}</p></div>
-        <div><span style="font-size:var(--fs-xs);color:var(--color-gray-500);text-transform:uppercase;letter-spacing:.08em">Email</span>
-             <p style="margin-top:2px"><a href="mailto:${contacto.email}" style="color:var(--color-accent)">${contacto.email}</a></p></div>
-        <div><span style="font-size:var(--fs-xs);color:var(--color-gray-500);text-transform:uppercase;letter-spacing:.08em">Teléfono</span>
-             <p style="margin-top:2px"><a href="tel:${contacto.telefono}" style="color:var(--color-accent)">${contacto.telefono}</a></p></div>
+    <div class="modal-detail">
+      <div class="modal-detail__grid">
+        <div>
+          <span class="modal-label">Cliente</span>
+          <p class="modal-value">${contacto.nombre} ${contacto.apellido}</p>
+        </div>
+        <div>
+          <span class="modal-label">Máquina</span>
+          <p class="modal-value">${contacto.tipo_maquina}</p>
+        </div>
+        <div>
+          <span class="modal-label">Email</span>
+          <p class="modal-value">
+            <a href="mailto:${contacto.email}" class="modal-value--link">${contacto.email}</a>
+          </p>
+        </div>
+        <div>
+          <span class="modal-label">Teléfono</span>
+          <p class="modal-value">
+            <a href="tel:${contacto.telefono}" class="modal-value--link">${contacto.telefono}</a>
+          </p>
+        </div>
       </div>
       <div>
-        <span style="font-size:var(--fs-xs);color:var(--color-gray-500);text-transform:uppercase;letter-spacing:.08em">Descripción del Problema</span>
-        <p style="margin-top:var(--sp-2);line-height:1.7;font-size:var(--fs-sm);color:var(--color-dark)">${contacto.descripcion}</p>
+        <span class="modal-label">Descripción del Problema</span>
+        <p class="modal-desc">${contacto.descripcion}</p>
       </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;padding-top:var(--sp-4);border-top:1px solid var(--color-gray-100)">
+      <div class="modal-footer">
         <span class="badge badge--${contacto.estado}">${contacto.estado.replace('_',' ')}</span>
-        <span style="font-size:var(--fs-xs);color:var(--color-gray-500)">${window.PF.formatDate(contacto.created_at)}</span>
+        <span class="modal-meta">${window.PF.formatDate(contacto.created_at)}</span>
       </div>
     </div>`;
 

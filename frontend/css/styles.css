@@ -1233,6 +1233,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   background: linear-gradient(135deg, #1E2D3D 0%, #2C3E50 100%);
 }
 
+/* Auth loader: ocultar con atributo [hidden] (sobreescribe display:flex) */
+.auth-loader[hidden] { display: none !important; }
+
 /* Admin loader overlay */
 .auth-loader {
   position: fixed; inset: 0;
