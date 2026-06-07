@@ -1,14 +1,29 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 from datetime import datetime, timedelta
-from database import engine, Base, get_db
+from database import engine, Base, get_db, SessionLocal
 from routers import users, contacts, products
 import models
 import schemas
 
 Base.metadata.create_all(bind=engine)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Auto-poblar la BD si está vacía (necesario en Render: filesystem efímero)."""
+    db = SessionLocal()
+    try:
+        if db.query(models.Usuario).count() == 0:
+            import seed
+            seed.run(db)
+    finally:
+        db.close()
+    yield
+
 
 app = FastAPI(
     title="PowerFix API — Taller Mecánico Especializado",
@@ -19,6 +34,7 @@ app = FastAPI(
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
+    lifespan=lifespan,
 )
 
 app.add_middleware(

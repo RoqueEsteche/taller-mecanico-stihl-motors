@@ -3,7 +3,7 @@
  * Funcionalidades globales: nav, tema, cookies, analítica
  */
 
-const API_URL = 'http://localhost:8000';
+const API_URL = window.PF_CONFIG?.API_URL || 'http://localhost:8000';
 
 /* ── Tema oscuro/claro ─────────────────────────────────────── */
 (function initTheme() {

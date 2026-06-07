@@ -3,7 +3,7 @@
  * Autenticación y control de acceso al panel
  */
 
-const API_URL = 'http://localhost:8000';
+const API_URL = window.PF_CONFIG?.API_URL || 'http://localhost:8000';
 
 document.addEventListener('DOMContentLoaded', () => {
   /* Si ya tiene sesión activa, ir al panel */
