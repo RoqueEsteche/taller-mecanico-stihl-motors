@@ -1,0 +1,101 @@
+supplier_key,name,contact,phone,email,notes
+PROV001,Importadora STIHL,Laura Gomez,0981765432,compras@stihl.com.py,Proveedor principal
+PROV002,TecnoMaq Paraguay,Carlos Mendez,0982234567,ventas@tecnomaq.com.py,Distribuidor oficial Husqvarna
+PROV003,Imporep S.R.L.,Ana Gimenez,0983345678,info@imporep.com.py,Importador mayorista
+PROV004,Repuestos & Motor,Luis Oviedo,0984456789,rep.motor@gmail.com,Mayorista repuestos locales
+PROV005,AgriMaq Paraguay,Claudia Rojas,0985567890,info@agrimaq.com.py,Importador maquinaria agricola
+PROV006,Ferreteria Industrial Perez,Jose Perez,0986678901,ferreteria.perez@gmail.com,Ferreteria industrial Asuncion
+PROV007,Stihl Service Center ASU,Rodrigo Benitez,0987789012,service@stihlpy.com,Service oficial Stihl
+PROV008,Distribuidora Honda Paraguay,Gustavo Riveros,0988890123,info@honda.com.py,Distribuidor oficial Honda
+PROV009,Casa Bosch Paraguay,Natalia Fleitas,0989901234,bosch@casabosch.com.py,Distribuidor oficial Bosch
+PROV010,Karcher Paraguay,Silvia Torres,0981234560,py@karcher.com,Distribuidor oficial Karcher
+PROV011,Makita Corporation LATAM,Patricia Vera,0982345671,latam@makita.cl,Fabricante Makita Chile
+PROV012,NGK Spark Plugs LATAM,Ana Carvalho,0983456782,spark@ngklatam.com.br,Fabricante bujias NGK
+PROV013,Bosch Filtros LATAM,Luciana Pires,0984567893,filtros@boschlatam.com.br,Fabricante filtros Bosch
+PROV014,Walbro Carburetors LATAM,Jose Alcantara,0985678904,mex@walbro.com,Fabricante carburadores Walbro
+PROV015,Zama Carburetors LATAM,Roberto Matos,0986789015,zama@zamalatam.com.br,Fabricante carburadores Zama
+PROV016,Oregon Products LATAM,Maria Garcia,0987890126,oregon@oregonlatam.com.ar,Cadenas y barras guia Oregon
+PROV017,Husqvarna Latin America,Marcos Lima,0988901237,latam@husqvarna.com,Fabricante Husqvarna Brasil
+PROV018,Echo Shindaiwa LATAM,Paulo Ferreira,0989012348,echo@echolatam.com.br,Distribuidor Echo Shindaiwa
+PROV019,Champion Auto Parts LATAM,Eduardo Reyes,0981123459,latam@champion.com,Distribuidor bujias Champion
+PROV020,Comet Pumps LATAM,Gianni Ferrari,0982234560,latam@cometpumps.com,Fabricante bombas Comet
+PROV021,AR North America LATAM,Roberto Marelli,0983345671,latam@arnorthamerica.com,Fabricante bombas AR
+PROV022,Fiskars Group LATAM,Mikaela Virtanen,0984456782,latam@fiskars.com,Fabricante herramientas Fiskars
+PROV023,Vikan LATAM Distribuidores,Diego Sosa,0985567893,ventas@vikanlat.com,Distribuidor Vikan Uruguay
+PROV024,Unger Professional LATAM,Peter Schneider,0986678904,latam@ungerglobal.com,Distribuidor Unger Miami
+PROV025,Leifheit AG Export,Petra Muller,0987789015,export@leifheit.de,Fabricante Leifheit Alemania
+PROV026,Nilfisk Paraguay,David Irala,0988890126,nilfisk@nilfiskpy.com,Distribuidor Nilfisk oficial
+PROV027,Kubota Paraguay,Tomas Colman,0989901237,kubota@kubotapy.com,Distribuidor Kubota oficial
+PROV028,Briggs Stratton Direct,Ryan Cooper,0981012348,service@briggs.com,Fabricante Briggs Stratton
+PROV029,Rotary Corporation,Gregory Mills,0982123459,orders@rotarycorp.com,Mayorista OEM USA
+PROV030,Stens Corporation,Kelly Ross,0983234560,stens@stens.com,Mayorista repuestos OEM USA
+PROV031,Global Parts Co,Kevin Brown,0984345671,orders@globalparts.us,Importador repuestos Miami
+PROV032,HydroTech Parts,Sandra Lee,0985456782,parts@hydrotechparts.com,Repuestos hidrolavadoras USA
+PROV033,Pressure Washers Direct,Chris Martin,0986567893,support@pwd.com,Especialista hidrolavadoras
+PROV034,Maquinas del Sur SA,Fabio Rios,0987678904,msur@maquinasdelsur.com.ar,Importador Buenos Aires
+PROV035,TG Repuestos SA,Carlos Funes,0988789015,info@tgrepuestos.com.ar,Mayorista repuestos Argentina
+PROV036,Hydraulic Clean Brasil,Renato Souza,0989890126,hcbrasil@hcbrasil.com.br,Distribuidor repuestos Brasil
+PROV037,Terraparts SRL,Diego Bogado,0981901237,terraparts@terraparts.com.py,Distribuidor local Luque
+PROV038,Motosport Paraguay,Ricardo Villalba,0982012348,motosport@motosport.com.py,Repuestos y accesorios PY
+PROV039,Service Maq Paraguay,Walter Ferreira,0983123459,servicemaq@gmail.com,Service y repuestos Lambare
+PROV040,ProClean Paraguay,Ximena Vera,0984234560,proclean@proclean.com.py,Distribuidor limpieza industrial
+PROV041,MotoPartes del Norte,Juan Benitez,0985345671,motopartesnorte@gmail.com,Distribuidor PJC
+PROV042,Importadora del Este,Pedro Duarte,0986456782,importeste@gmail.com,Importador Ciudad del Este
+PROV043,Repuestos Japoneses SA,Kenji Yamada,0987567893,repjapon@gmail.com,Mayorista repuestos japoneses
+PROV044,Carburetors Filters SA,Alberto Ponce,0988678904,info@carbfilters.com.ar,Mayorista Argentina
+PROV045,Premium Parts Solutions,Amber Stone,0989789015,info@premiumparts.com,Mayorista USA Tampa
+PROV046,Midwest Engine Warehouse,Rick Hoover,0981890126,engines@mew.com,Mayorista motores USA
+PROV047,Jacks Small Engines,Jack Hamilton,0982901237,jacks@jackssm.com,Minorista repuestos USA
+PROV048,Distribuidora Alfa,Roberto Acosta,0983012348,alfa.cia@gmail.com,Distribuidor regional CDE
+PROV049,Ferreteria Don Carlos,Carlos Gonzalez,0984123459,doncarlos@gmail.com,Ferreteria Villarrica
+PROV050,Agro Import Paraguay,Ramon Villasboa,0985234560,agroimport@gmail.com,Importador agro Encarnacion
+PROV051,Maquiequipos Chile,Daniela Soto,0986345671,ventas@maquiequipos.cl,Importador Chile
+PROV052,AgroParts Chile,Camila Morales,0987456782,agroparts@agropartschile.cl,Distribuidor agricola Temuco
+PROV053,Colombiana de Repuestos,Luz Marina Gomez,0988567893,crep@crep.com.co,Distribuidor Colombia
+PROV054,Peruana de Maquinaria,Julio Condori,0989678904,info@peruanamaq.com.pe,Importador Lima
+PROV055,Ecuatoriana de Herramientas,Adriana Vera,0981789015,info@ecuaherr.com.ec,Distribuidor Ecuador
+PROV056,Representaciones Tecnicas Sur,Hernan Castro,0982890126,rts@rts.com.uy,Rep tecnico Uruguay
+PROV057,Grupo Tecno Andino,Miguel Quispe,0983901237,gtandino@tecnoandino.pe,Distribuidor regional Peru
+PROV058,Herramientas y Mas,Patricia Saguier,0984012348,herramientas.mas@gmail.com,Distribuidor Asuncion
+PROV059,Coromoto Herramientas,Andres Peraza,0985123459,coromoto@gmail.com,Distribuidor multi-marca
+PROV060,Dealer Sockets Paraguay,Hugo Riquelme,0986234560,dealer@socketspar.com,Concesionario multi Asuncion
+PROV061,Unilimpieza Industrial,Carmen Espinola,0987345671,unilimpieza@gmail.com,Distribuidor limpieza PY
+PROV062,Maquipark SA,Catalina Benitez,0988456782,maquipark@maquipark.com.py,Importador maquinaria PY
+PROV063,Herramientas Industriales MX,Alejandro Cruz,0989567893,ventas@himx.com.mx,Distribuidor Mexico
+PROV064,Itsasoa Import Export,Inaki Urrutikoetxea,0981678904,itsasoa@itsasoa.com.py,Importador europeo Paraguay
+PROV065,TriMaq LATAM,Federico Davila,0982789015,trimaq@trimaqlatam.com,Distribuidor tri-marca Mendoza
+PROV066,Outdoor Power Equipment,Megan Harper,0983890126,info@ope.com,Distribuidor outdoor Portland
+PROV067,OEM Parts Warehouse,Tyler Brooks,0984901237,oem@oempartswarehouse.com,Importador OEM Orlando
+PROV068,CleanPro Supply,Brian Williams,0985012348,sales@cleanprosupply.com,Mayorista suministros Atlanta
+PROV069,MotoService CDE,Nestor Rodas,0986123459,motoservicecde@gmail.com,Service repuestos CDE
+PROV070,Agro Soluciones del Norte,Lorenzo Vera,0987234560,agrosoln@gmail.com,Importador agro San Pedro
+PROV071,Ferreteria Industrial Norte,Olga Sanchez,0988345671,ferreterianorte@gmail.com,Ferreteria Concepcion
+PROV072,Distribuidora Sur Paraguaya,Fernando Acosta,0989456782,distsurpy@gmail.com,Distribuidor Encarnacion
+PROV073,Industrias Maq SA Buenos Aires,Graciela Flores,0981567893,ventas@indmaq.com.ar,Importador Argentina
+PROV074,MaxPower Parts,Eric Koch,0982678904,parts@maxpowerparts.com,Mayorista repuestos USA
+PROV075,Northern Tool Equipment,Robert Keller,0983789015,info@northerntool.com,Minorista herramientas USA
+PROV076,Kawasaki Motors Parts LATAM,Hiroshi Tanaka,0984890126,parts@kawasaki-latam.com,Fabricante Kawasaki LATAM
+PROV077,Yamaha Motor LATAM Parts,Tatsuki Yamamoto,0985901237,parts@yamaha-latam.com,Fabricante Yamaha LATAM
+PROV078,Parker Hannifin Hydraulics,James Wilson,0986012348,hydraulics@parker.com,Distribuidor hidraulica USA
+PROV079,Interpump LATAM,Stefano Rossi,0987123459,latam@interpump.it,Fabricante bombas Italia
+PROV080,Annovi Reverberi LATAM,Claudio Berri,0988234560,ar@annovi.com,Fabricante bombas presion
+PROV081,Redmax Husqvarna Dealer,Michael Scott,0989345671,dealer@redmaxdealer.com,Concesionario Redmax USA
+PROV082,Echo Bear Cat LATAM,Jorge Medina,0981456782,latam@echolatam.com,Distribuidor Echo Mexico
+PROV083,Ferreteria El Martillo,Miguel Rios,0982567893,elmartillo@gmail.com,Ferreteria Coronel Oviedo
+PROV084,Moto Partes Asuncion,Jorge Cabrera,0983678904,motopartes@gmail.com,Mayorista repuestos motos
+PROV085,Karcher Center Encarnacion,Veronica Nunez,0984789015,enc@karcher.com.py,Karcher oficial Encarnacion
+PROV086,Karcher Center Limpio,Mauricio Lopez,0985890126,fernanmora@karcher.com.py,Karcher Fernando de la Mora
+PROV087,Stihl do Brasil,Fernanda Costa,0986901237,stihlbr@stihl.com.br,Fabricante Stihl Brasil
+PROV088,Distribuidora Tecnica CR,Eduardo Mora,0987012348,dtcr@dtcr.cr,Distribuidor Costa Rica
+PROV089,Tecumseh Parts Center,Sandra White,0988123459,parts@tecumseh.com,Distribuidor repuestos USA
+PROV090,Stanley Black Decker LATAM,Mark Johnson,0989234560,latam@sbdinc.com,Fabricante Stanley LATAM
+PROV091,Cleaning Parts Global,Hannah Green,0981345671,info@cleaningpartsglobal.com,Mayorista limpieza Nashville
+PROV092,Maquipar SA,Catalina Torres,0982456782,info@maquipar.com.py,Importador PY Asuncion
+PROV093,Herramientas Profesionales PY,Marcos Riveros,0983567893,hppy@gmail.com,Mayorista herramientas
+PROV094,SpareParts Express,John Davies,0984678904,info@sparepartsexpress.com,Importador repuestos online
+PROV095,Motores y Repuestos SA,Guillermo Paredes,0985789015,motorepsa@gmail.com,Distribuidor Asuncion
+PROV096,AgroTec Paraguay,Fernando Galeano,0986890126,agrotec@agrotec.com.py,Importador agro-industrial
+PROV097,Lubricantes y Filtros PY,Rodrigo Vera,0987901237,lubrifiltros@gmail.com,Mayorista lubricantes PY
+PROV098,PowerParts LATAM,Carlos Ibarra,0988012348,power@powerpartslatam.com,Distribuidor multi-marca
+PROV099,Moto Accesorios del Sur,Lucia Benitez,0989123459,motoaccdelsur@gmail.com,Accesorios motos Paraguay
+PROV100,Central de Repuestos PY,Oscar Mendoza,0981234561,centralrep@gmail.com,Central repuestos Asuncion

@@ -1,0 +1,9 @@
+{
+  "generatedAt": "2026-05-04T01:21:09.169Z",
+  "counts": {
+    "supplier": 101,
+    "part": 101,
+    "client": 102,
+    "work_order": 201
+  }
+}

@@ -1,0 +1,59 @@
+databases:
+  - name: stihl-motors-db
+    databaseName: stihl_motors
+    user: stihl_motors_user
+
+services:
+  - type: web
+    name: stihl-motors-app
+    runtime: node
+    plan: starter
+    autoDeploy: true
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npm run start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: API_PORT
+        value: 10000
+      - key: CORS_ORIGIN
+        value: https://stihl-motors.onrender.com
+      - key: VITE_API_URL
+        value: ''
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: stihl-motors-db
+          property: connectionString
+      - key: PGSSL
+        value: true
+      - key: APP_URL
+        value: https://stihl-motors.onrender.com
+      - key: BANCARD_PUBLIC_KEY
+        sync: false
+      - key: BANCARD_PRIVATE_KEY
+        sync: false
+      - key: BANCARD_SANDBOX
+        value: false
+      # ── Credenciales del usuario administrador inicial ─────────────────
+      # Configurar manualmente en el Dashboard de Render antes del primer deploy
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: ADMIN_NAME
+        sync: false
+      - key: RECEIVER_EMAIL
+        sync: false
+      - key: RECEIVER_PASSWORD
+        sync: false
+      - key: MECHANIC_EMAIL
+        sync: false
+      - key: MECHANIC_PASSWORD
+        sync: false
+      - key: STOCK_MANAGER_EMAIL
+        sync: false
+      - key: STOCK_MANAGER_PASSWORD
+        sync: false

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Stihl Motors</string>
+    <string name="title_activity_main">Stihl Motors</string>
+    <string name="package_name">com.stihlmotors.app</string>
+    <string name="custom_url_scheme">com.stihlmotors.app</string>
+</resources>
