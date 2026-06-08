@@ -74,7 +74,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   setText('userRole',   user.rol);
 
   const hoy = new Date().toLocaleDateString('es-AR', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-  setText('topbarDate', hoy.charAt(0).toUpperCase() + hoy.slice(1));
+  const hoyFmt = hoy.charAt(0).toUpperCase() + hoy.slice(1);
+  setText('topbarDate', hoyFmt);
+  setText('dashDate', hoyFmt);
 
   initSidebar();
   initTheme();
@@ -83,7 +85,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.addEventListener('keydown', e => {
     if (e.key !== 'Escape') return;
     ['ordenModal','turnoModal','mecanicoModal','repuestoModal','stockModal',
-     'servicioModal','usuarioModal','contactoModal'].forEach(id => {
+     'servicioModal','contactoModal'].forEach(id => {
       document.getElementById(id)?.classList.remove('modal--open');
     });
   });
@@ -169,28 +171,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelector('[data-panel="inventario"]')?.click();
     openRepuestoModal();
   });
-  document.getElementById('quickUsuarioBtn')?.addEventListener('click', () => {
-    document.querySelector('[data-panel="usuarios"]')?.click();
-    openUsuarioModal();
+  document.getElementById('dashVerOrdenes')?.addEventListener('click', () => {
+    document.querySelector('[data-panel="ordenes"]')?.click();
+  });
+  document.getElementById('dashVerAgenda')?.addEventListener('click', () => {
+    document.querySelector('[data-panel="agenda"]')?.click();
   });
   document.getElementById('servicioModalClose')?.addEventListener('click',   closeServicioModal);
   document.getElementById('servicioModalCancel')?.addEventListener('click',  closeServicioModal);
   document.getElementById('servicioModalOverlay')?.addEventListener('click', closeServicioModal);
   document.getElementById('servicioForm')?.addEventListener('submit', submitServicioForm);
 
-  /* ── USUARIOS ─────────────────────────────────────────────── */
-  document.getElementById('usuariosBody')?.addEventListener('click', handleUsuarioAction);
-  document.getElementById('nuevoUsuarioBtn')?.addEventListener('click', () => openUsuarioModal());
-  document.getElementById('usuarioModalClose')?.addEventListener('click',   closeUsuarioModal);
-  document.getElementById('usuarioModalCancel')?.addEventListener('click',  closeUsuarioModal);
-  document.getElementById('usuarioModalOverlay')?.addEventListener('click', closeUsuarioModal);
-  document.getElementById('usuarioForm')?.addEventListener('submit', submitUsuarioForm);
-
   /* Cargar mecánicos en cache y luego datos */
   await refreshMecanicosCache();
   await Promise.all([
     loadDashboard(), loadOrdenes(), loadAgenda(), loadMecanicos(),
-    loadInventario(), loadClientes(), loadContactos(), loadServicios(), loadUsuarios(),
+    loadInventario(), loadClientes(), loadContactos(), loadServicios(),
   ]);
 });
 
@@ -203,9 +199,8 @@ function initSidebar() {
     mecanicos:  'Mecánicos',
     inventario: 'Inventario de Repuestos',
     clientes:   'Clientes',
-    contactos:  'Contactos',
+    contactos:  'Contactos / Leads',
     servicios:  'Catálogo de Servicios',
-    usuarios:   'Usuarios del Sistema',
     analytics:  'Analítica',
   };
 
@@ -272,6 +267,62 @@ async function loadDashboard() {
     renderBarChart('chartMaquinas',       c.maquinas.labels, c.maquinas.data, 'Consultas');
     _visitasData = c.visitas;
   } catch { /* dashboard no crítico */ }
+  loadDashboardActivity();
+}
+
+async function loadDashboardActivity() {
+  const ordBody = document.getElementById('dashOrdenesBody');
+  const turBody = document.getElementById('dashTurnosBody');
+
+  try {
+    const res = await fetchAuth('/api/ordenes');
+    if (res.ok) {
+      const ordenes = await res.json();
+      if (!ordenes.length) {
+        if (ordBody) ordBody.innerHTML = '<tr><td colspan="5" class="td-empty">No hay órdenes registradas.</td></tr>';
+      } else if (ordBody) {
+        ordBody.innerHTML = '';
+        ordenes.slice(0, 6).forEach(o => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td><span class="ot-numero">${o.numero || '#'+o.id}</span></td>
+            <td><strong>${o.cliente_nombre}</strong></td>
+            <td>${truncate(o.vehiculo, 26)}</td>
+            <td><span class="badge badge--${o.estado}">${LABEL_ORDEN[o.estado] || o.estado}</span></td>
+            <td class="td-muted">${formatDateShort(o.created_at)}</td>`;
+          ordBody.appendChild(tr);
+        });
+      }
+    }
+  } catch {
+    if (ordBody) ordBody.innerHTML = '<tr><td colspan="5" class="td-error">Error al cargar.</td></tr>';
+  }
+
+  try {
+    const res = await fetchAuth('/api/turnos');
+    if (res.ok) {
+      const turnos = await res.json();
+      if (!turnos.length) {
+        if (turBody) turBody.innerHTML = '<tr><td colspan="4" class="td-empty">No hay turnos registrados.</td></tr>';
+      } else if (turBody) {
+        turBody.innerHTML = '';
+        turnos.slice(0, 6).forEach(t => {
+          const fechaFmt = t.fecha
+            ? new Date(t.fecha + 'T00:00:00').toLocaleDateString('es-AR', { day:'2-digit', month:'2-digit', year:'numeric' })
+            : '—';
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td><strong>${fechaFmt}</strong><div class="td-muted">${t.hora}</div></td>
+            <td>${t.cliente_nombre}</td>
+            <td>${truncate(t.vehiculo, 20)}</td>
+            <td><span class="badge badge--${t.estado}">${LABEL_TURNO[t.estado] || t.estado}</span></td>`;
+          turBody.appendChild(tr);
+        });
+      }
+    }
+  } catch {
+    if (turBody) turBody.innerHTML = '<tr><td colspan="4" class="td-error">Error al cargar.</td></tr>';
+  }
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -1088,115 +1139,6 @@ async function submitServicioForm(e) {
   } catch (err) {
     showToast(`No se pudo guardar: ${err.message}`, 'error');
   } finally { btn.disabled = false; txt.textContent = 'Guardar Servicio'; }
-}
-
-/* ══════════════════════════════════════════════════════════════
-   USUARIOS
-   ══════════════════════════════════════════════════════════════ */
-async function loadUsuarios() {
-  const tbody = document.getElementById('usuariosBody');
-  if (!tbody) return;
-  tbody.innerHTML = '<tr><td colspan="6" class="td-empty">Cargando...</td></tr>';
-
-  try {
-    const res = await fetchAuth('/api/users');
-    if (!res.ok) throw new Error();
-    const users = await res.json();
-    if (!users.length) {
-      tbody.innerHTML = '<tr><td colspan="6" class="td-empty">No hay usuarios.</td></tr>';
-      return;
-    }
-    tbody.innerHTML = '';
-    users.forEach(u => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td><strong>${u.nombre} ${u.apellido}</strong></td>
-        <td>${u.email}</td>
-        <td><span class="badge badge--rol-${u.rol}">${LABEL_ROL[u.rol] || u.rol}</span></td>
-        <td><span class="badge ${u.is_active ? 'badge--activo' : 'badge--inactivo'}">${u.is_active ? 'Activo' : 'Inactivo'}</span></td>
-        <td class="td-muted">${formatDateShort(u.created_at)}</td>
-        <td class="td-actions">
-          <button class="btn btn--sm btn--view" data-id="${u.id}" data-action="usr-edit" title="Editar"><i class="fa-solid fa-pen"></i></button>
-          <button class="btn btn--sm ${u.is_active ? 'btn--deactivate' : 'btn--activate'}" data-id="${u.id}" data-action="usr-toggle" title="${u.is_active ? 'Desactivar' : 'Activar'}">
-            <i class="fa-solid fa-${u.is_active ? 'user-slash' : 'user-check'}"></i>
-          </button>
-        </td>`;
-      tr._data = u;
-      tbody.appendChild(tr);
-    });
-  } catch {
-    tbody.innerHTML = '<tr><td colspan="6" class="td-error">Error al cargar usuarios.</td></tr>';
-  }
-}
-
-async function handleUsuarioAction(e) {
-  const btn = e.target.closest('[data-action]');
-  if (!btn) return;
-  const id = parseInt(btn.dataset.id);
-  const tr = btn.closest('tr');
-
-  if (btn.dataset.action === 'usr-edit') return openUsuarioModal(tr._data);
-
-  if (btn.dataset.action === 'usr-toggle') {
-    try {
-      const r = await fetchAuth(`/api/users/${id}/toggle`, 'PATCH');
-      if (!r.ok) { const d = await r.json().catch(()=>({})); throw new Error(d.detail); }
-      await loadUsuarios();
-    } catch (err) { showToast(err.message || 'No se pudo cambiar el estado.', 'error'); }
-  }
-}
-
-function openUsuarioModal(user = null) {
-  const modal = document.getElementById('usuarioModal');
-  if (!modal) return;
-  document.getElementById('usuarioForm').reset();
-  const hint = document.getElementById('uPasswordHint');
-  if (user) {
-    document.getElementById('usuarioModalTitle').textContent = 'Editar Usuario';
-    document.getElementById('usuarioId').value   = user.id;
-    document.getElementById('uNombre').value     = user.nombre;
-    document.getElementById('uApellido').value   = user.apellido;
-    document.getElementById('uEmail').value      = user.email;
-    document.getElementById('uRol').value        = user.rol;
-    if (hint) hint.textContent = '(opcional — dejar vacío para no cambiar)';
-  } else {
-    document.getElementById('usuarioModalTitle').textContent = 'Nuevo Usuario';
-    document.getElementById('usuarioId').value = '';
-    if (hint) hint.textContent = '(requerida)';
-  }
-  modal.classList.add('modal--open');
-}
-
-function closeUsuarioModal() { document.getElementById('usuarioModal')?.classList.remove('modal--open'); }
-
-async function submitUsuarioForm(e) {
-  e.preventDefault();
-  const id  = document.getElementById('usuarioId').value;
-  const btn = document.getElementById('usuarioFormSubmit');
-  const txt = document.getElementById('usuarioSubmitText');
-
-  const nombre   = document.getElementById('uNombre').value.trim();
-  const apellido = document.getElementById('uApellido').value.trim();
-  const email    = document.getElementById('uEmail').value.trim();
-  const rol      = document.getElementById('uRol').value;
-  const password = document.getElementById('uPassword').value;
-
-  if (!nombre || !apellido || !email || !rol) { showToast('Completá todos los campos obligatorios.', 'warning'); return; }
-  if (!id && !password) { showToast('La contraseña es requerida para nuevos usuarios.', 'warning'); return; }
-
-  const payload = { nombre, apellido, email, rol, password: password || undefined };
-  btn.disabled = true; txt.textContent = 'Guardando...';
-  try {
-    const res = id
-      ? await fetchAuth(`/api/users/${id}`, 'PUT', payload)
-      : await fetchAuth('/api/users/admin-create', 'POST', { ...payload, password: password });
-    if (!res.ok) throw new Error((await res.json().catch(()=>({}))).detail || `Error ${res.status}`);
-    closeUsuarioModal();
-    await loadUsuarios();
-    showToast('Usuario guardado.', 'success');
-  } catch (err) {
-    showToast(`No se pudo guardar: ${err.message}`, 'error');
-  } finally { btn.disabled = false; txt.textContent = 'Guardar Usuario'; }
 }
 
 /* ══════════════════════════════════════════════════════════════

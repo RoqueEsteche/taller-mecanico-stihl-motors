@@ -4,12 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panel Interno — PowerFix</title>
-  <meta name="description" content="Panel de administración del sistema PowerFix. Gestión de órdenes, turnos, mecánicos, inventario y usuarios del taller mecánico." />
   <meta name="robots" content="noindex, nofollow" />
-  <meta property="og:title" content="Panel Interno — PowerFix" />
-  <meta property="og:description" content="Sistema de gestión integral para taller mecánico especializado." />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="PowerFix" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -72,22 +67,18 @@
         </button>
         <button type="button" class="sidebar__item" data-panel="contactos">
           <span class="sidebar__item-icon"><i class="fa-solid fa-address-book"></i></span>
-          Contactos
+          Contactos / Leads
         </button>
         <button type="button" class="sidebar__item" data-panel="servicios">
           <span class="sidebar__item-icon"><i class="fa-solid fa-screwdriver-wrench"></i></span>
           Servicios
         </button>
-
-        <div class="sidebar__section-label">Sistema</div>
-        <button type="button" class="sidebar__item" data-panel="usuarios">
-          <span class="sidebar__item-icon"><i class="fa-solid fa-users-gear"></i></span>
-          Usuarios
-        </button>
         <button type="button" class="sidebar__item" data-panel="analytics">
           <span class="sidebar__item-icon"><i class="fa-solid fa-chart-line"></i></span>
           Analítica
         </button>
+
+        <div class="sidebar__section-label">Web</div>
         <a href="index.html" class="sidebar__item" target="_blank">
           <span class="sidebar__item-icon"><i class="fa-solid fa-globe"></i></span>
           Ver Sitio Web
@@ -116,7 +107,7 @@
           <div class="topbar__subtitle" id="topbarDate"></div>
         </div>
         <div class="topbar__right">
-          <button type="button" class="nav__theme-toggle topbar__theme-btn" id="themeToggle" aria-label="Cambiar tema">
+          <button type="button" class="topbar__theme-btn" id="themeToggle" aria-label="Cambiar tema">
             <i class="fa-solid fa-sun" id="themeIcon"></i>
           </button>
           <button type="button" class="topbar__menu-btn" id="sidebarToggle" aria-label="Menú">
@@ -127,56 +118,77 @@
 
       <!-- ── DASHBOARD ─────────────────────────────────────────── -->
       <section class="admin-panel admin-panel--active" id="panel-dashboard">
-        <div class="dashboard-hero">
-          <div class="dashboard-hero__content">
-            <div class="dashboard-hero__eyebrow">Panel de Control</div>
-            <h2 class="dashboard-hero__title">Tu taller al día</h2>
-            <p class="dashboard-hero__text">Administra órdenes, turnos, repuestos y recursos desde un solo tablero. Accede rápidamente a las funciones más importantes y controla el estado operativo del taller.</p>
+
+        <!-- Encabezado con acciones rápidas -->
+        <div class="dash-header">
+          <div>
+            <h2 class="dash-header__title">Panel de Control</h2>
+            <p class="dash-header__subtitle" id="dashDate"></p>
           </div>
-          <div class="dashboard-hero__actions">
-            <button type="button" class="btn btn--primary" id="quickOrdenBtn"><i class="fa-solid fa-clipboard-list"></i> Nueva orden</button>
-            <button type="button" class="btn btn--secondary" id="quickTurnoBtn"><i class="fa-solid fa-calendar-plus"></i> Agendar turno</button>
-            <button type="button" class="btn btn--secondary" id="quickServicioBtn"><i class="fa-solid fa-screwdriver-wrench"></i> Nuevo servicio</button>
-            <button type="button" class="btn btn--secondary" id="quickRepuestoBtn"><i class="fa-solid fa-boxes-stacked"></i> Nuevo repuesto</button>
-            <button type="button" class="btn btn--secondary" id="quickUsuarioBtn"><i class="fa-solid fa-user-plus"></i> Nuevo usuario</button>
+          <div class="dash-header__actions">
+            <button type="button" class="btn btn--primary btn--sm" id="quickOrdenBtn">
+              <i class="fa-solid fa-plus"></i> Nueva Orden
+            </button>
+            <button type="button" class="btn btn--outline btn--sm" id="quickTurnoBtn">
+              <i class="fa-solid fa-calendar-plus"></i> Turno
+            </button>
+            <button type="button" class="btn btn--outline btn--sm" id="quickServicioBtn">
+              <i class="fa-solid fa-screwdriver-wrench"></i> Servicio
+            </button>
+            <button type="button" class="btn btn--outline btn--sm" id="quickRepuestoBtn">
+              <i class="fa-solid fa-boxes-stacked"></i> Repuesto
+            </button>
           </div>
         </div>
 
-        <div class="stat-cards">
-          <div class="stat-card stat-card--warning">
-            <div class="stat-card__label">Órdenes Activas</div>
-            <div class="stat-card__value" id="statOrdenesActivas">—</div>
-            <div class="stat-card__icon"><i class="fa-solid fa-gears"></i></div>
+        <!-- KPI primarios -->
+        <div class="kpi-grid">
+          <div class="kpi-card kpi-card--orange">
+            <div class="kpi-card__icon"><i class="fa-solid fa-gears"></i></div>
+            <div class="kpi-card__body">
+              <div class="kpi-card__value" id="statOrdenesActivas">—</div>
+              <div class="kpi-card__label">Órdenes Activas</div>
+            </div>
           </div>
-          <div class="stat-card stat-card--info">
+          <div class="kpi-card kpi-card--blue">
+            <div class="kpi-card__icon"><i class="fa-solid fa-calendar-check"></i></div>
+            <div class="kpi-card__body">
+              <div class="kpi-card__value" id="statTurnosHoy">—</div>
+              <div class="kpi-card__label">Turnos Hoy</div>
+            </div>
+          </div>
+          <div class="kpi-card kpi-card--green">
+            <div class="kpi-card__icon"><i class="fa-solid fa-check-circle"></i></div>
+            <div class="kpi-card__body">
+              <div class="kpi-card__value" id="statOrdenesListas">—</div>
+              <div class="kpi-card__label">Listas p/ Entregar</div>
+            </div>
+          </div>
+          <div class="kpi-card kpi-card--red">
+            <div class="kpi-card__icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div class="kpi-card__body">
+              <div class="kpi-card__value" id="statStockBajo">—</div>
+              <div class="kpi-card__label">Stock Bajo / Crítico</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats secundarios -->
+        <div class="stat-cards">
+          <div class="stat-card">
             <div class="stat-card__label">Ingresadas Hoy</div>
             <div class="stat-card__value" id="statOrdenesHoy">—</div>
             <div class="stat-card__icon"><i class="fa-solid fa-clipboard-list"></i></div>
-          </div>
-          <div class="stat-card stat-card--success">
-            <div class="stat-card__label">Listas para Entregar</div>
-            <div class="stat-card__value" id="statOrdenesListas">—</div>
-            <div class="stat-card__icon"><i class="fa-solid fa-check-circle"></i></div>
           </div>
           <div class="stat-card">
             <div class="stat-card__label">Mecánicos Activos</div>
             <div class="stat-card__value" id="statMecanicos">—</div>
             <div class="stat-card__icon"><i class="fa-solid fa-user-gear"></i></div>
           </div>
-          <div class="stat-card stat-card--info">
+          <div class="stat-card">
             <div class="stat-card__label">Turnos Pendientes</div>
             <div class="stat-card__value" id="statTurnosPendientes">—</div>
             <div class="stat-card__icon"><i class="fa-solid fa-calendar-days"></i></div>
-          </div>
-          <div class="stat-card stat-card--warning">
-            <div class="stat-card__label">Turnos Hoy</div>
-            <div class="stat-card__value" id="statTurnosHoy">—</div>
-            <div class="stat-card__icon"><i class="fa-solid fa-calendar-check"></i></div>
-          </div>
-          <div class="stat-card stat-card--error">
-            <div class="stat-card__label">Stock Bajo / Crítico</div>
-            <div class="stat-card__value" id="statStockBajo">—</div>
-            <div class="stat-card__icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
           </div>
           <div class="stat-card">
             <div class="stat-card__label">Total Órdenes</div>
@@ -185,6 +197,7 @@
           </div>
         </div>
 
+        <!-- Gráficos -->
         <div class="charts-grid">
           <div class="chart-card">
             <div class="chart-card__header">
@@ -199,24 +212,68 @@
             <div class="chart-card__header">
               <div>
                 <div class="chart-card__title">Consultas por Tipo de Equipo</div>
-                <div class="chart-card__subtitle">Solicitudes recibidas desde el sitio</div>
+                <div class="chart-card__subtitle">Solicitudes recibidas desde el sitio web</div>
               </div>
             </div>
             <canvas id="chartMaquinas" height="260"></canvas>
           </div>
         </div>
+
+        <!-- Actividad reciente -->
+        <div class="dash-activity">
+          <div class="dash-activity__panel">
+            <div class="dash-activity__header">
+              <span class="dash-activity__title">Últimas Órdenes de Trabajo</span>
+              <button type="button" class="btn btn--sm btn--ghost" id="dashVerOrdenes">
+                Ver todo <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>#OT</th><th>Cliente</th><th>Equipo</th><th>Estado</th><th>Ingreso</th>
+                  </tr>
+                </thead>
+                <tbody id="dashOrdenesBody">
+                  <tr><td colspan="5" class="td-empty">Cargando...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="dash-activity__panel">
+            <div class="dash-activity__header">
+              <span class="dash-activity__title">Próximos Turnos</span>
+              <button type="button" class="btn btn--sm btn--ghost" id="dashVerAgenda">
+                Ver todo <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Fecha / Hora</th><th>Cliente</th><th>Equipo</th><th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody id="dashTurnosBody">
+                  <tr><td colspan="4" class="td-empty">Cargando...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
       </section>
 
       <!-- ── ÓRDENES DE TRABAJO ──────────────────────────────────── -->
       <section class="admin-panel" id="panel-ordenes">
         <div class="data-table-wrapper">
           <div class="data-table-header">
-            <div>
-              <div class="data-table-header__title">Órdenes de Trabajo</div>
-            </div>
+            <div><div class="data-table-header__title">Órdenes de Trabajo</div></div>
             <div class="data-table-actions">
               <select id="filtroOrdenEstado" class="select-estado" aria-label="Filtrar por estado">
-                <option value="">Todos</option>
+                <option value="">Todos los estados</option>
                 <option value="recibido">Recibido</option>
                 <option value="diagnosticando">Diagnosticando</option>
                 <option value="reparando">Reparando</option>
@@ -233,14 +290,8 @@
             <table class="data-table" aria-label="Órdenes de trabajo">
               <thead>
                 <tr>
-                  <th>#OT</th>
-                  <th>Cliente</th>
-                  <th>Equipo / Vehículo</th>
-                  <th>Mecánico</th>
-                  <th>Prioridad</th>
-                  <th>Estado</th>
-                  <th>Ingreso</th>
-                  <th>Acciones</th>
+                  <th>#OT</th><th>Cliente</th><th>Equipo / Máquina</th>
+                  <th>Mecánico</th><th>Prioridad</th><th>Estado</th><th>Ingreso</th><th>Acciones</th>
                 </tr>
               </thead>
               <tbody id="ordenesBody"></tbody>
@@ -248,7 +299,7 @@
           </div>
         </div>
 
-        <!-- Modal Orden de Trabajo -->
+        <!-- Modal Orden -->
         <div class="modal" id="ordenModal" role="dialog" aria-modal="true" aria-labelledby="ordenModalTitle">
           <div class="modal__overlay" id="ordenModalOverlay"></div>
           <div class="modal__content modal__content--xl">
@@ -256,7 +307,6 @@
             <h3 class="modal__title" id="ordenModalTitle">Nueva Orden de Trabajo</h3>
             <form id="ordenForm" novalidate>
               <input type="hidden" id="ordenId" />
-
               <div class="form__section">
                 <div class="form__section-title"><i class="fa-solid fa-user"></i> Datos del Cliente</div>
                 <div class="form__row">
@@ -266,7 +316,7 @@
                   </div>
                   <div class="form__group">
                     <label class="form__label" for="oTelefono">Teléfono</label>
-                    <input type="tel" class="form__input" id="oTelefono" placeholder="ej: 3814 123456" />
+                    <input type="tel" class="form__input" id="oTelefono" placeholder="ej: 381 400-1234" />
                   </div>
                 </div>
                 <div class="form__group">
@@ -279,11 +329,11 @@
                 <div class="form__section-title"><i class="fa-solid fa-wrench"></i> Equipo y Diagnóstico</div>
                 <div class="form__group">
                   <label class="form__label" for="oVehiculo">Vehículo / Máquina *</label>
-                  <input type="text" class="form__input" id="oVehiculo" required placeholder="ej: Motosierra Stihl MS 250 / Toyota Corolla 2020" />
+                  <input type="text" class="form__input" id="oVehiculo" required placeholder="ej: Motosierra Stihl MS 250" />
                 </div>
                 <div class="form__group">
                   <label class="form__label" for="oProblema">Descripción del problema *</label>
-                  <textarea class="form__input form__textarea" id="oProblema" rows="2" required placeholder="Describí el problema o la falla que reporta el cliente..."></textarea>
+                  <textarea class="form__input form__textarea" id="oProblema" rows="2" required placeholder="Describí el problema reportado..."></textarea>
                 </div>
                 <div class="form__group">
                   <label class="form__label" for="oDiagnostico">Diagnóstico técnico</label>
@@ -300,9 +350,7 @@
                 <div class="form__row">
                   <div class="form__group">
                     <label class="form__label" for="oMecanico">Mecánico asignado</label>
-                    <select class="form__input" id="oMecanico">
-                      <option value="">— Sin asignar —</option>
-                    </select>
+                    <select class="form__input" id="oMecanico"><option value="">— Sin asignar —</option></select>
                   </div>
                   <div class="form__group">
                     <label class="form__label" for="oPrioridad">Prioridad</label>
@@ -338,11 +386,11 @@
                 <div class="form__row form__row--3">
                   <div class="form__group">
                     <label class="form__label" for="oCostoMO">Mano de obra ($)</label>
-                    <input type="number" class="form__input" id="oCostoMO" min="0" step="100" value="0" placeholder="0" />
+                    <input type="number" class="form__input" id="oCostoMO" min="0" step="100" value="0" />
                   </div>
                   <div class="form__group">
                     <label class="form__label" for="oCostoRep">Repuestos ($)</label>
-                    <input type="number" class="form__input" id="oCostoRep" min="0" step="100" value="0" placeholder="0" />
+                    <input type="number" class="form__input" id="oCostoRep" min="0" step="100" value="0" />
                   </div>
                   <div class="form__group">
                     <label class="form__label">Total ($)</label>
@@ -366,7 +414,7 @@
         </div>
       </section>
 
-      <!-- ── AGENDA DE TURNOS ───────────────────────────────────── -->
+      <!-- ── AGENDA ────────────────────────────────────────────── -->
       <section class="admin-panel" id="panel-agenda">
         <div class="data-table-wrapper">
           <div class="data-table-header">
@@ -382,13 +430,8 @@
             <table class="data-table" aria-label="Agenda de turnos">
               <thead>
                 <tr>
-                  <th>Fecha / Hora</th>
-                  <th>Cliente</th>
-                  <th>Equipo</th>
-                  <th>Servicio</th>
-                  <th>Mecánico</th>
-                  <th>Estado</th>
-                  <th>Acciones</th>
+                  <th>Fecha / Hora</th><th>Cliente</th><th>Equipo</th>
+                  <th>Servicio</th><th>Mecánico</th><th>Estado</th><th>Acciones</th>
                 </tr>
               </thead>
               <tbody id="agendaBody"></tbody>
@@ -438,9 +481,7 @@
               </div>
               <div class="form__group">
                 <label class="form__label" for="tMecanico">Mecánico asignado</label>
-                <select class="form__input" id="tMecanico">
-                  <option value="">— Sin asignar —</option>
-                </select>
+                <select class="form__input" id="tMecanico"><option value="">— Sin asignar —</option></select>
               </div>
               <div class="form__group">
                 <label class="form__label" for="tNotas">Notas</label>
@@ -471,14 +512,7 @@
           <div class="table-scroll">
             <table class="data-table" aria-label="Mecánicos">
               <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Teléfono</th>
-                  <th>Email</th>
-                  <th>Especialidad</th>
-                  <th>Estado</th>
-                  <th>Acciones</th>
-                </tr>
+                <tr><th>Nombre</th><th>Teléfono</th><th>Email</th><th>Especialidad</th><th>Estado</th><th>Acciones</th></tr>
               </thead>
               <tbody id="mecanicosBody"></tbody>
             </table>
@@ -532,7 +566,7 @@
         </div>
       </section>
 
-      <!-- ── INVENTARIO / REPUESTOS ─────────────────────────────── -->
+      <!-- ── INVENTARIO ─────────────────────────────────────────── -->
       <section class="admin-panel" id="panel-inventario">
         <div class="data-table-wrapper">
           <div class="data-table-header">
@@ -546,15 +580,7 @@
           <div class="table-scroll">
             <table class="data-table" aria-label="Inventario">
               <thead>
-                <tr>
-                  <th>Código</th>
-                  <th>Nombre / Categoría</th>
-                  <th>Stock</th>
-                  <th>Mín.</th>
-                  <th>Precio Venta</th>
-                  <th>Proveedor</th>
-                  <th>Acciones</th>
-                </tr>
+                <tr><th>Código</th><th>Nombre / Categoría</th><th>Stock</th><th>Mín.</th><th>Precio Venta</th><th>Proveedor</th><th>Acciones</th></tr>
               </thead>
               <tbody id="inventarioBody"></tbody>
             </table>
@@ -625,7 +651,7 @@
           </div>
         </div>
 
-        <!-- Modal Ajuste de Stock -->
+        <!-- Modal Stock -->
         <div class="modal" id="stockModal" role="dialog" aria-modal="true" aria-labelledby="stockModalTitle">
           <div class="modal__overlay" id="stockModalOverlay"></div>
           <div class="modal__content modal__content--sm">
@@ -638,18 +664,16 @@
                 <span class="modal-label">Stock actual</span>
                 <p class="modal-value" id="stockActual">—</p>
               </div>
-              <div class="stock-adjust__form">
-                <div class="form__group">
-                  <label class="form__label" for="stockTipo">Tipo de movimiento</label>
-                  <select class="form__input" id="stockTipo">
-                    <option value="entrada">Entrada (agregar stock)</option>
-                    <option value="salida">Salida (restar stock)</option>
-                  </select>
-                </div>
-                <div class="form__group">
-                  <label class="form__label" for="stockCantidad">Cantidad</label>
-                  <input type="number" class="form__input" id="stockCantidad" min="1" value="1" />
-                </div>
+              <div class="form__group">
+                <label class="form__label" for="stockTipo">Tipo de movimiento</label>
+                <select class="form__input" id="stockTipo">
+                  <option value="entrada">Entrada (agregar stock)</option>
+                  <option value="salida">Salida (restar stock)</option>
+                </select>
+              </div>
+              <div class="form__group">
+                <label class="form__label" for="stockCantidad">Cantidad</label>
+                <input type="number" class="form__input" id="stockCantidad" min="1" value="1" />
               </div>
               <div class="form__actions">
                 <button type="button" class="btn btn--secondary" id="stockModalCancel">Cancelar</button>
@@ -666,7 +690,7 @@
           <div class="data-table-header">
             <div><div class="data-table-header__title">Clientes</div></div>
             <div class="data-table-actions">
-              <input type="search" class="form__input" id="clientesBuscar" placeholder="Buscar clientes por nombre, email o teléfono" aria-label="Buscar clientes" />
+              <input type="search" class="form__input" id="clientesBuscar" placeholder="Buscar por nombre, email o teléfono" style="max-width:280px" />
               <button type="button" class="btn btn--secondary btn--sm" id="recargarClientes">
                 <i class="fa-solid fa-rotate-right"></i> Recargar
               </button>
@@ -675,13 +699,7 @@
           <div class="table-scroll">
             <table class="data-table" aria-label="Clientes">
               <thead>
-                <tr>
-                  <th>Cliente</th>
-                  <th>Email</th>
-                  <th>Teléfono</th>
-                  <th>Consultas</th>
-                  <th>Último contacto</th>
-                </tr>
+                <tr><th>Cliente</th><th>Email</th><th>Teléfono</th><th>Consultas</th><th>Último contacto</th></tr>
               </thead>
               <tbody id="clientesBody"></tbody>
             </table>
@@ -689,40 +707,32 @@
         </div>
       </section>
 
-      <!-- ── CONTACTOS / LEADS ───────────────────────────────────── -->
+      <!-- ── CONTACTOS ──────────────────────────────────────────── -->
       <section class="admin-panel" id="panel-contactos">
         <div class="data-table-wrapper">
           <div class="data-table-header">
             <div><div class="data-table-header__title">Contactos / Leads</div></div>
             <div class="data-table-actions">
-              <button type="button" class="btn btn--primary btn--sm" id="nuevoContactoBtn">
-                <i class="fa-solid fa-plus"></i> Nuevo contacto
-              </button>
-              <input type="search" class="form__input" id="contactosBuscar" placeholder="Buscar por nombre, email o máquina" aria-label="Buscar contactos" />
-              <select class="form__input" id="contactosEstado" aria-label="Filtrar por estado">
-                <option value="">Todos los estados</option>
+              <input type="search" class="form__input" id="contactosBuscar" placeholder="Buscar por nombre, email o máquina" style="max-width:240px" />
+              <select class="select-estado" id="contactosEstado" aria-label="Filtrar por estado">
+                <option value="">Todos</option>
                 <option value="nuevo">Nuevo</option>
                 <option value="en_proceso">En proceso</option>
                 <option value="resuelto">Resuelto</option>
                 <option value="cerrado">Cerrado</option>
               </select>
               <button type="button" class="btn btn--secondary btn--sm" id="recargarContactos">
-                <i class="fa-solid fa-rotate-right"></i> Recargar
+                <i class="fa-solid fa-rotate-right"></i>
+              </button>
+              <button type="button" class="btn btn--primary btn--sm" id="nuevoContactoBtn">
+                <i class="fa-solid fa-plus"></i> Nuevo
               </button>
             </div>
           </div>
           <div class="table-scroll">
             <table class="data-table" aria-label="Contactos">
               <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Email</th>
-                  <th>Teléfono</th>
-                  <th>Máquina</th>
-                  <th>Estado</th>
-                  <th>Creado</th>
-                  <th>Acciones</th>
-                </tr>
+                <tr><th>Nombre</th><th>Email</th><th>Teléfono</th><th>Máquina</th><th>Estado</th><th>Creado</th><th>Acciones</th></tr>
               </thead>
               <tbody id="contactosBody"></tbody>
             </table>
@@ -798,15 +808,7 @@
           <div class="table-scroll">
             <table class="data-table" aria-label="Servicios">
               <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Nombre</th>
-                  <th>Categoría</th>
-                  <th>Precio Base</th>
-                  <th>Tiempo</th>
-                  <th>Estado</th>
-                  <th>Acciones</th>
-                </tr>
+                <tr><th>#</th><th>Nombre</th><th>Categoría</th><th>Precio Base</th><th>Tiempo</th><th>Estado</th><th>Acciones</th></tr>
               </thead>
               <tbody id="serviciosBody"></tbody>
             </table>
@@ -873,81 +875,6 @@
         </div>
       </section>
 
-      <!-- ── USUARIOS ───────────────────────────────────────────── -->
-      <section class="admin-panel" id="panel-usuarios">
-        <div class="data-table-wrapper">
-          <div class="data-table-header">
-            <div><div class="data-table-header__title">Usuarios del Sistema</div></div>
-            <div class="data-table-actions">
-              <button type="button" class="btn btn--primary btn--sm" id="nuevoUsuarioBtn">
-                <i class="fa-solid fa-user-plus"></i> Nuevo Usuario
-              </button>
-            </div>
-          </div>
-          <div class="table-scroll">
-            <table class="data-table" aria-label="Usuarios">
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Email</th>
-                  <th>Rol</th>
-                  <th>Estado</th>
-                  <th>Creado</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody id="usuariosBody"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Modal Usuario -->
-        <div class="modal" id="usuarioModal" role="dialog" aria-modal="true" aria-labelledby="usuarioModalTitle">
-          <div class="modal__overlay" id="usuarioModalOverlay"></div>
-          <div class="modal__content">
-            <button type="button" class="modal__close" id="usuarioModalClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-            <h3 class="modal__title" id="usuarioModalTitle">Nuevo Usuario</h3>
-            <form id="usuarioForm" novalidate>
-              <input type="hidden" id="usuarioId" />
-              <div class="form__row">
-                <div class="form__group">
-                  <label class="form__label" for="uNombre">Nombre *</label>
-                  <input type="text" class="form__input" id="uNombre" required />
-                </div>
-                <div class="form__group">
-                  <label class="form__label" for="uApellido">Apellido *</label>
-                  <input type="text" class="form__input" id="uApellido" required />
-                </div>
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="uEmail">Email *</label>
-                <input type="email" class="form__input" id="uEmail" required />
-              </div>
-              <div class="form__row">
-                <div class="form__group">
-                  <label class="form__label" for="uRol">Rol *</label>
-                  <select class="form__input" id="uRol" required>
-                    <option value="cliente">Cliente</option>
-                    <option value="empleado">Empleado</option>
-                    <option value="admin">Administrador</option>
-                  </select>
-                </div>
-                <div class="form__group">
-                  <label class="form__label" for="uPassword">Contraseña <span id="uPasswordHint" class="form__hint">(requerida)</span></label>
-                  <input type="password" class="form__input" id="uPassword" placeholder="Mínimo 8 caracteres" />
-                </div>
-              </div>
-              <div class="form__actions">
-                <button type="button" class="btn btn--secondary" id="usuarioModalCancel">Cancelar</button>
-                <button type="submit" class="btn btn--primary" id="usuarioFormSubmit">
-                  <span id="usuarioSubmitText">Guardar Usuario</span>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
-
       <!-- ── ANALÍTICA ──────────────────────────────────────────── -->
       <section class="admin-panel" id="panel-analytics">
         <div class="charts-grid">
@@ -955,7 +882,7 @@
             <div class="chart-card__header">
               <div>
                 <div class="chart-card__title">Visitas por Página — Últimos 7 días</div>
-                <div class="chart-card__subtitle">Accesos registrados por URL del sitio público</div>
+                <div class="chart-card__subtitle">Accesos registrados desde el sitio público</div>
               </div>
             </div>
             <canvas id="chartVisitas" height="200"></canvas>
@@ -963,10 +890,10 @@
         </div>
       </section>
 
-    </div><!-- /admin-main -->
-  </div><!-- /admin-layout -->
+    </div>
+  </div>
 
-  <!-- Toast & Confirm Modal -->
+  <!-- Toast & Confirm -->
   <div class="toast" id="toast" role="alert" aria-live="polite"></div>
 
   <div class="confirm-modal" id="confirmModal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
