@@ -505,7 +505,7 @@ export default function WorkOrdersModule({ globalSearch = '', portalMode = false
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
             {[
               { label: 'Pendientes', value: scopedOrders.filter((order) => order.status === 'pending').length, tone: 'bg-orange-50 text-orange-600 border-orange-100' },
               { label: 'En taller', value: scopedOrders.filter((order) => order.status === 'in_progress').length, tone: 'bg-sky-50 text-sky-600 border-sky-100' },

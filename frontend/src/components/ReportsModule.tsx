@@ -172,7 +172,7 @@ export default function ReportsModule() {
       )}
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
         {[
           { label: 'Facturación Total', value: `₲ ${totalRevenue.toLocaleString()}`, icon: DollarSign, color: 'text-green-500', bg: 'bg-green-50' },
           { label: 'Ventas Realizadas', value: totalSalesCount, icon: FileText, color: 'text-blue-500', bg: 'bg-blue-50' },
@@ -198,7 +198,7 @@ export default function ReportsModule() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
         {/* Sales Trend */}
         <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm">
           <h3 className="text-xs font-black text-sidebar-bg uppercase italic mb-8 border-b pb-4 flex items-center gap-2">
@@ -288,7 +288,7 @@ export default function ReportsModule() {
           <h2 className="text-xs font-black text-sidebar-bg uppercase italic tracking-widest flex items-center gap-2">
             🔁 Control de Garantías
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
             <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
               <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Garantías este mes</p>
               <p className="text-4xl font-black text-primary italic mt-1">{warranties.thisMonth}</p>

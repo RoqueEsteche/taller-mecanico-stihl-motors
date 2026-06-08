@@ -120,7 +120,7 @@ export default function LeadsModule() {
   const converted  = leads.filter(l => l.status === 'converted').length;
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="space-y-6">
 
       {/* ── Encabezado ─────────────────────────────────────────────────────── */}
       <div className="flex items-center justify-between">
@@ -137,7 +137,7 @@ export default function LeadsModule() {
       </div>
 
       {/* ── KPI Cards ──────────────────────────────────────────────────────── */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
         {[
           { label: 'Total Leads', value: totalLeads, color: 'text-primary' },
           { label: 'Nuevos',      value: newLeads,   color: 'text-orange-500' },
@@ -152,10 +152,10 @@ export default function LeadsModule() {
       </div>
 
       {/* ── Gráficos ───────────────────────────────────────────────────────── */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
 
         {/* Gráfico de barras: leads por mes */}
-        <div className="lg:col-span-2 bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+        <div className="xl:col-span-2 bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
           <h2 className="text-sm font-bold text-gray-700 uppercase tracking-wide mb-4">
             📊 Leads por mes (últimos 6 meses)
           </h2>
