@@ -273,6 +273,22 @@ async function ensureCatalogTables() {
   `);
   await query('create index if not exists idx_lead_created_at on lead(created_at desc)');
   await query('create index if not exists idx_lead_status on lead(status)');
+
+  await query(`
+    create table if not exists cash_register (
+      id uuid primary key default gen_random_uuid(),
+      opened_by text not null,
+      opened_at timestamptz not null default now(),
+      opening_balance numeric(12,2) not null default 0,
+      closed_by text,
+      closed_at timestamptz,
+      closing_balance numeric(12,2),
+      expected_balance numeric(12,2),
+      difference numeric(12,2),
+      notes text,
+      status text not null default 'open' check (status in ('open','closed'))
+    )
+  `);
 }
 
 app.use((req, res, next) => {
@@ -1515,23 +1531,6 @@ app.get('/api/clients/:id/purchases', requireAuth, async (req, res) => {
 });
 
 // ── Corte de caja ─────────────────────────────────────────────────────────
-// Tabla creada automáticamente si no existe
-await query(`
-  create table if not exists cash_register (
-    id uuid primary key default gen_random_uuid(),
-    opened_by text not null,
-    opened_at timestamptz not null default now(),
-    opening_balance numeric(12,2) not null default 0,
-    closed_by text,
-    closed_at timestamptz,
-    closing_balance numeric(12,2),
-    expected_balance numeric(12,2),
-    difference numeric(12,2),
-    notes text,
-    status text not null default 'open' check (status in ('open','closed'))
-  )
-`);
-
 app.get('/api/cash-register/current', requireAuth, requireRole('admin', 'receiver'), async (_req, res) => {
   try {
     const result = await query(`
