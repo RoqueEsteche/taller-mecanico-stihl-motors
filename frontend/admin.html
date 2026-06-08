@@ -70,6 +70,10 @@
           <span class="sidebar__item-icon"><i class="fa-solid fa-users"></i></span>
           Clientes
         </button>
+        <button type="button" class="sidebar__item" data-panel="contactos">
+          <span class="sidebar__item-icon"><i class="fa-solid fa-address-book"></i></span>
+          Contactos
+        </button>
         <button type="button" class="sidebar__item" data-panel="servicios">
           <span class="sidebar__item-icon"><i class="fa-solid fa-screwdriver-wrench"></i></span>
           Servicios
@@ -665,6 +669,100 @@
               </thead>
               <tbody id="clientesBody"></tbody>
             </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── CONTACTOS / LEADS ───────────────────────────────────── -->
+      <section class="admin-panel" id="panel-contactos">
+        <div class="data-table-wrapper">
+          <div class="data-table-header">
+            <div><div class="data-table-header__title">Contactos / Leads</div></div>
+            <div class="data-table-actions">
+              <button type="button" class="btn btn--primary btn--sm" id="nuevoContactoBtn">
+                <i class="fa-solid fa-plus"></i> Nuevo contacto
+              </button>
+              <input type="search" class="form__input" id="contactosBuscar" placeholder="Buscar por nombre, email o máquina" aria-label="Buscar contactos" />
+              <select class="form__input" id="contactosEstado" aria-label="Filtrar por estado">
+                <option value="">Todos los estados</option>
+                <option value="nuevo">Nuevo</option>
+                <option value="en_proceso">En proceso</option>
+                <option value="resuelto">Resuelto</option>
+                <option value="cerrado">Cerrado</option>
+              </select>
+              <button type="button" class="btn btn--secondary btn--sm" id="recargarContactos">
+                <i class="fa-solid fa-rotate-right"></i> Recargar
+              </button>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="data-table" aria-label="Contactos">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Email</th>
+                  <th>Teléfono</th>
+                  <th>Máquina</th>
+                  <th>Estado</th>
+                  <th>Creado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="contactosBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Modal Contacto -->
+        <div class="modal" id="contactoModal" role="dialog" aria-modal="true" aria-labelledby="contactoModalTitle">
+          <div class="modal__overlay" id="contactoModalOverlay"></div>
+          <div class="modal__content modal__content--lg">
+            <button type="button" class="modal__close" id="contactoModalClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="modal__title" id="contactoModalTitle">Detalle de Contacto</h3>
+            <form id="contactoForm" novalidate>
+              <input type="hidden" id="contactoId" />
+              <div class="form__row">
+                <div class="form__group">
+                  <label class="form__label" for="cNombre">Nombre *</label>
+                  <input type="text" class="form__input" id="cNombre" required />
+                </div>
+                <div class="form__group">
+                  <label class="form__label" for="cApellido">Apellido *</label>
+                  <input type="text" class="form__input" id="cApellido" required />
+                </div>
+              </div>
+              <div class="form__group">
+                <label class="form__label" for="cEmail">Email *</label>
+                <input type="email" class="form__input" id="cEmail" required />
+              </div>
+              <div class="form__group">
+                <label class="form__label" for="cTelefono">Teléfono *</label>
+                <input type="tel" class="form__input" id="cTelefono" required />
+              </div>
+              <div class="form__group">
+                <label class="form__label" for="cMaquina">Tipo de máquina *</label>
+                <input type="text" class="form__input" id="cMaquina" required />
+              </div>
+              <div class="form__group">
+                <label class="form__label" for="cDescripcion">Descripción *</label>
+                <textarea class="form__input form__textarea" id="cDescripcion" rows="3" required></textarea>
+              </div>
+              <div class="form__group">
+                <label class="form__label" for="cEstado">Estado</label>
+                <select class="form__input" id="cEstado">
+                  <option value="nuevo">Nuevo</option>
+                  <option value="en_proceso">En proceso</option>
+                  <option value="resuelto">Resuelto</option>
+                  <option value="cerrado">Cerrado</option>
+                </select>
+              </div>
+              <div class="form__actions">
+                <button type="button" class="btn btn--secondary" id="contactoModalCancel">Cancelar</button>
+                <button type="submit" class="btn btn--primary" id="contactoFormSubmit">
+                  <span id="contactoSubmitText">Guardar contacto</span>
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </section>

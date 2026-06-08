@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.addEventListener('keydown', e => {
     if (e.key !== 'Escape') return;
     ['ordenModal','turnoModal','mecanicoModal','repuestoModal','stockModal',
-     'servicioModal','usuarioModal'].forEach(id => {
+     'servicioModal','usuarioModal','contactoModal'].forEach(id => {
       document.getElementById(id)?.classList.remove('modal--open');
     });
   });
@@ -138,6 +138,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /* ── CLIENTES ─────────────────────────────────────────────── */
   document.getElementById('recargarClientes')?.addEventListener('click', loadClientes);
+  document.getElementById('recargarContactos')?.addEventListener('click', () => loadContactos());
+  document.getElementById('contactosBuscar')?.addEventListener('input', debounce(() => loadContactos(), 300));
+  document.getElementById('contactosEstado')?.addEventListener('change', () => loadContactos());
+  document.getElementById('contactosBody')?.addEventListener('click', handleContactoAction);
+  document.getElementById('contactoModalClose')?.addEventListener('click', closeContactoModal);
+  document.getElementById('contactoModalCancel')?.addEventListener('click', closeContactoModal);
+  document.getElementById('contactoModalOverlay')?.addEventListener('click', closeContactoModal);
+  document.getElementById('contactoForm')?.addEventListener('submit', submitContactoForm);
 
   /* ── SERVICIOS ────────────────────────────────────────────── */
   document.getElementById('serviciosBody')?.addEventListener('click', handleServicioAction);
@@ -159,7 +167,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   await refreshMecanicosCache();
   await Promise.all([
     loadDashboard(), loadOrdenes(), loadAgenda(), loadMecanicos(),
-    loadInventario(), loadClientes(), loadServicios(), loadUsuarios(),
+    loadInventario(), loadClientes(), loadContactos(), loadServicios(), loadUsuarios(),
   ]);
 });
 
@@ -172,6 +180,7 @@ function initSidebar() {
     mecanicos:  'Mecánicos',
     inventario: 'Inventario de Repuestos',
     clientes:   'Clientes',
+    contactos:  'Contactos',
     servicios:  'Catálogo de Servicios',
     usuarios:   'Usuarios del Sistema',
     analytics:  'Analítica',
@@ -1156,6 +1165,132 @@ async function submitUsuarioForm(e) {
   } catch (err) {
     showToast(`No se pudo guardar: ${err.message}`, 'error');
   } finally { btn.disabled = false; txt.textContent = 'Guardar Usuario'; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CONTACTOS / LEADS
+   ══════════════════════════════════════════════════════════════ */
+async function loadContactos() {
+  const tbody  = document.getElementById('contactosBody');
+  if (!tbody) return;
+  tbody.innerHTML = '<tr><td colspan="7" class="td-empty">Cargando...</td></tr>';
+
+  const estado = document.getElementById('contactosEstado')?.value || '';
+  const busqueda = document.getElementById('contactosBuscar')?.value.trim() || '';
+  const queryParts = [];
+  if (estado) queryParts.push(`estado=${encodeURIComponent(estado)}`);
+  if (busqueda) queryParts.push(`q=${encodeURIComponent(busqueda)}`);
+  const url = `/api/contactos${queryParts.length ? `?${queryParts.join('&')}` : ''}`;
+
+  try {
+    const res = await fetchAuth(url);
+    if (!res.ok) throw new Error();
+    const contactos = await res.json();
+
+    if (!contactos.length) {
+      tbody.innerHTML = '<tr><td colspan="7" class="td-empty">No hay contactos que coincidan con la búsqueda.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = '';
+    contactos.forEach(c => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><strong>${c.nombre} ${c.apellido}</strong></td>
+        <td><a href="mailto:${c.email}" class="modal-value--link">${c.email}</a></td>
+        <td>${c.telefono || '<span class="td-muted">—</span>'}</td>
+        <td title="${c.tipo_maquina}">${truncate(c.tipo_maquina, 24)}</td>
+        <td><span class="badge badge--${c.estado}">${c.estado.replace(/_/g, ' ')}</span></td>
+        <td class="td-muted">${formatDateShort(c.created_at)}</td>
+        <td class="td-actions">
+          <button class="btn btn--sm btn--view" data-id="${c.id}" data-action="contacto-edit" title="Editar"><i class="fa-solid fa-pen"></i></button>
+          <button class="btn btn--sm btn--delete" data-id="${c.id}" data-action="contacto-delete" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+        </td>`;
+      tr._data = c;
+      tbody.appendChild(tr);
+    });
+  } catch {
+    tbody.innerHTML = '<tr><td colspan="7" class="td-error">Error al cargar contactos.</td></tr>';
+  }
+}
+
+function handleContactoAction(e) {
+  const btn = e.target.closest('[data-action]');
+  if (!btn) return;
+  const id = parseInt(btn.dataset.id);
+  const tr = btn.closest('tr');
+
+  if (btn.dataset.action === 'contacto-edit') {
+    return openContactoModal(tr._data);
+  }
+
+  if (btn.dataset.action === 'contacto-delete') {
+    return showConfirm('Eliminar contacto', '¿Deseas eliminar este contacto? Esta acción es irreversible.')
+      .then(async ok => {
+        if (!ok) return;
+        const res = await fetchAuth(`/api/contactos/${id}`, 'DELETE');
+        if (!res.ok) throw new Error();
+        await loadContactos();
+        showToast('Contacto eliminado.', 'success');
+      })
+      .catch(() => showToast('No se pudo eliminar el contacto.', 'error'));
+  }
+}
+
+function openContactoModal(contacto = null) {
+  document.getElementById('contactoForm')?.reset();
+  document.getElementById('contactoId').value = contacto?.id || '';
+  document.getElementById('cNombre').value      = contacto?.nombre || '';
+  document.getElementById('cApellido').value    = contacto?.apellido || '';
+  document.getElementById('cEmail').value       = contacto?.email || '';
+  document.getElementById('cTelefono').value    = contacto?.telefono || '';
+  document.getElementById('cMaquina').value     = contacto?.tipo_maquina || '';
+  document.getElementById('cDescripcion').value = contacto?.descripcion || '';
+  document.getElementById('cEstado').value      = contacto?.estado || 'nuevo';
+  document.getElementById('contactoModalTitle').textContent = contacto ? 'Editar Contacto' : 'Nuevo Contacto';
+  document.getElementById('contactoSubmitText').textContent = contacto ? 'Guardar contacto' : 'Crear contacto';
+  document.getElementById('contactoModal')?.classList.add('modal--open');
+}
+
+function closeContactoModal() {
+  document.getElementById('contactoModal')?.classList.remove('modal--open');
+}
+
+async function submitContactoForm(e) {
+  e.preventDefault();
+  const id       = document.getElementById('contactoId').value;
+  const nombre   = document.getElementById('cNombre').value.trim();
+  const apellido = document.getElementById('cApellido').value.trim();
+  const email    = document.getElementById('cEmail').value.trim();
+  const telefono = document.getElementById('cTelefono').value.trim();
+  const maquina  = document.getElementById('cMaquina').value.trim();
+  const desc     = document.getElementById('cDescripcion').value.trim();
+
+  if (!nombre || !apellido || !email || !telefono || !maquina || !desc) {
+    showToast('Completa todos los campos obligatorios.', 'warning');
+    return;
+  }
+
+  try {
+    const res = await fetchAuth(id ? `/api/contactos/${id}` : '/api/contactos', id ? 'PUT' : 'POST', {
+      nombre, apellido, email, telefono, tipo_maquina: maquina, descripcion: desc,
+      estado: document.getElementById('cEstado').value,
+    });
+    if (!res.ok) throw new Error((await res.json().catch(() => ({}))).detail || 'Error');
+    closeContactoModal();
+    await loadContactos();
+    showToast(`Contacto ${id ? 'actualizado' : 'creado'}.`, 'success');
+  } catch (err) {
+    showToast(`No se pudo guardar: ${err.message || 'Error'}`, 'error');
+  }
+}
+
+function debounce(fn, delay = 250) {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn(...args), delay);
+  };
 }
 
 /* ══════════════════════════════════════════════════════════════

@@ -52,6 +52,7 @@ class ContactoCreate(BaseModel):
     telefono:     str = Field(min_length=6, max_length=20)
     tipo_maquina: str = Field(min_length=2)
     descripcion:  str = Field(min_length=10)
+    estado:       Optional[str] = None
 
 
 class ContactoResponse(ContactoCreate):
