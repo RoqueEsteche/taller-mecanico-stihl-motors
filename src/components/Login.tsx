@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { KeyRound, Wrench, Eye, EyeOff } from '../lib/icons';
+import { KeyRound, Eye, EyeOff } from '../lib/icons';
 import { loginWithPassword } from '../lib/session';
-
-const FEATURES = ['Órdenes de Trabajo', 'Control de Stock', 'Punto de Venta', 'Reportes'];
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -26,91 +24,64 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex">
-      {/* ── Panel izquierdo — branding ── */}
-      <div className="hidden lg:flex lg:w-[42%] bg-[#1a1a1a] flex-col justify-between p-14 relative overflow-hidden">
-        {/* Decoración de fondo */}
-        <div className="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-primary/5 pointer-events-none" />
-        <div className="absolute -right-8 bottom-20 w-48 h-48 rounded-full bg-primary/5 pointer-events-none" />
-
-        {/* Logo */}
-        <div className="flex items-center gap-3 relative z-10">
-          <div className="w-9 h-9 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/30">
-            <Wrench className="w-4 h-4 text-white" />
-          </div>
-          <span className="text-white/60 font-black text-[11px] uppercase tracking-[0.2em] italic">
-            Sistema de Gestión
-          </span>
-        </div>
-
-        {/* Título */}
-        <div className="relative z-10">
-          <p className="text-primary text-[11px] font-black uppercase tracking-[0.3em] mb-4">
-            Taller Mecánico
-          </p>
-          <h1 className="text-[2.6rem] font-black text-white italic uppercase leading-[1.05] tracking-tighter mb-5">
-            Control<br/>Total de<br/>tu Taller
-          </h1>
-          <p className="text-gray-500 text-sm font-medium leading-relaxed max-w-xs">
-            Gestión integral de reparaciones, inventario, ventas y personal técnico.
-          </p>
-        </div>
-
-        {/* Feature pills */}
-        <div className="grid grid-cols-2 gap-2.5 relative z-10">
-          {FEATURES.map(f => (
-            <div key={f} className="bg-white/[0.04] border border-white/[0.06] rounded-xl px-3.5 py-2.5">
-              <p className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">{f}</p>
-            </div>
-          ))}
-        </div>
+    <div className="min-h-screen bg-[#0f1013] flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Fondo decorativo */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-primary/8 blur-3xl" />
+        <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-primary/6 blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/3 blur-[100px]" />
       </div>
 
-      {/* ── Panel derecho — formulario ── */}
       <motion.div
-        initial={{ opacity: 0, x: 12 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.3 }}
-        className="flex-1 flex items-center justify-center bg-white p-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35 }}
+        className="relative z-10 w-full max-w-[420px]"
       >
-        <div className="w-full max-w-[340px]">
-          {/* Logo móvil */}
-          <div className="flex items-center gap-2.5 mb-10 lg:hidden">
-            <div className="w-8 h-8 bg-[#1a1a1a] rounded-xl flex items-center justify-center">
-              <Wrench className="w-4 h-4 text-primary" />
-            </div>
-            <span className="font-black text-[#1a1a1a] text-xs uppercase tracking-widest italic">
-              Gestión de Taller
-            </span>
+        {/* Logo */}
+        <div className="flex flex-col items-center mb-10">
+          <div className="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center shadow-2xl shadow-primary/40 mb-4">
+            <svg viewBox="0 0 24 24" className="w-7 h-7 text-white" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+            </svg>
           </div>
+          <h1 className="text-white font-black text-xl uppercase tracking-widest italic">
+            Stihl Motors
+          </h1>
+          <p className="text-gray-500 text-xs font-semibold uppercase tracking-widest mt-1">
+            Sistema de Gestión
+          </p>
+        </div>
 
-          <h2 className="text-2xl font-black text-[#1a1a1a] italic uppercase tracking-tighter mb-1">
+        {/* Card */}
+        <div className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-8 backdrop-blur-sm shadow-2xl">
+          <h2 className="text-white font-black text-2xl italic uppercase tracking-tight mb-1">
             Bienvenido
           </h2>
-          <p className="text-gray-400 text-[11px] font-semibold mb-8">
+          <p className="text-gray-500 text-xs font-semibold mb-7">
             Acceso exclusivo para personal autorizado
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Email */}
             <div>
-              <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5">
+              <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1.5">
                 Correo electrónico
               </label>
               <input
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                placeholder="usuario@empresa.com"
+                placeholder="usuario@stihlmotors.com"
                 required
                 autoComplete="email"
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm font-semibold outline-none bg-gray-50 focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all placeholder:text-gray-300"
+                className="w-full px-4 py-3 rounded-xl text-sm font-semibold outline-none transition-all
+                           bg-white/[0.06] border border-white/[0.1] text-white placeholder:text-gray-600
+                           focus:border-primary/70 focus:ring-2 focus:ring-primary/15 focus:bg-white/[0.08]"
               />
             </div>
 
-            {/* Contraseña */}
             <div>
-              <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5">
+              <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1.5">
                 Contraseña
               </label>
               <div className="relative">
@@ -121,31 +92,33 @@ export default function Login() {
                   placeholder="••••••••"
                   required
                   autoComplete="current-password"
-                  className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-xl text-sm font-semibold outline-none bg-gray-50 focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all placeholder:text-gray-300"
+                  className="w-full px-4 py-3 pr-12 rounded-xl text-sm font-semibold outline-none transition-all
+                             bg-white/[0.06] border border-white/[0.1] text-white placeholder:text-gray-600
+                             focus:border-primary/70 focus:ring-2 focus:ring-primary/15 focus:bg-white/[0.08]"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPwd(v => !v)}
                   tabIndex={-1}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-primary transition-colors"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-primary transition-colors"
                 >
                   {showPwd ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
             </div>
 
-            {/* Error */}
             {error && (
-              <div className="bg-red-50 border border-red-100 rounded-xl px-4 py-3">
-                <p className="text-[11px] font-bold text-red-600">{error}</p>
+              <div className="bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3">
+                <p className="text-xs font-bold text-red-400">{error}</p>
               </div>
             )}
 
-            {/* Submit */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-primary text-white py-3.5 rounded-xl font-black text-[11px] uppercase tracking-widest shadow-md shadow-orange-100 hover:brightness-105 active:scale-[0.98] transition-all disabled:opacity-60 flex items-center justify-center gap-2 mt-1"
+              className="w-full bg-primary text-white py-3.5 rounded-xl font-black text-[11px] uppercase tracking-widest
+                         shadow-lg shadow-primary/30 hover:brightness-110 active:scale-[0.98] transition-all
+                         disabled:opacity-60 flex items-center justify-center gap-2 mt-2"
             >
               {loading ? (
                 <>
@@ -160,11 +133,11 @@ export default function Login() {
               )}
             </button>
           </form>
-
-          <p className="mt-8 text-[10px] text-gray-300 font-bold uppercase tracking-widest text-center">
-            Credenciales gestionadas por administración
-          </p>
         </div>
+
+        <p className="mt-6 text-[10px] text-gray-600 font-bold uppercase tracking-widest text-center">
+          Credenciales gestionadas por administración
+        </p>
       </motion.div>
     </div>
   );
