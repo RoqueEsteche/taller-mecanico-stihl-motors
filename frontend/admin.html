@@ -116,16 +116,47 @@
         </div>
       </header>
 
-      <!-- ── DASHBOARD ─────────────────────────────────────────── -->
+      <!-- ══════════════════════════════════════════════════════════
+           DASHBOARD
+           ══════════════════════════════════════════════════════════ -->
       <section class="admin-panel admin-panel--active" id="panel-dashboard">
 
-        <!-- Encabezado con acciones rápidas -->
-        <div class="dash-header">
-          <div>
-            <h2 class="dash-header__title">Panel de Control</h2>
-            <p class="dash-header__subtitle" id="dashDate"></p>
+        <!-- Métricas: barra horizontal de indicadores clave -->
+        <div class="stats-strip">
+          <div class="stats-strip__item stats-strip__item--orange">
+            <span class="stats-strip__value" id="statOrdenesActivas">—</span>
+            <span class="stats-strip__label">Órdenes Activas</span>
           </div>
-          <div class="dash-header__actions">
+          <div class="stats-strip__item stats-strip__item--blue">
+            <span class="stats-strip__value" id="statTurnosHoy">—</span>
+            <span class="stats-strip__label">Turnos Hoy</span>
+          </div>
+          <div class="stats-strip__item stats-strip__item--green">
+            <span class="stats-strip__value" id="statOrdenesListas">—</span>
+            <span class="stats-strip__label">Listas p/ Entregar</span>
+          </div>
+          <div class="stats-strip__item stats-strip__item--red">
+            <span class="stats-strip__value" id="statStockBajo">—</span>
+            <span class="stats-strip__label">Stock Bajo</span>
+          </div>
+          <div class="stats-strip__item">
+            <span class="stats-strip__value" id="statOrdenesHoy">—</span>
+            <span class="stats-strip__label">Ingresadas Hoy</span>
+          </div>
+          <div class="stats-strip__item">
+            <span class="stats-strip__value" id="statMecanicos">—</span>
+            <span class="stats-strip__label">Mecánicos Activos</span>
+          </div>
+          <div class="stats-strip__item">
+            <span class="stats-strip__value" id="statTurnosPendientes">—</span>
+            <span class="stats-strip__label">Turnos Pendientes</span>
+          </div>
+          <div class="stats-strip__item">
+            <span class="stats-strip__value" id="statTotalOrdenes">—</span>
+            <span class="stats-strip__label">Total Órdenes</span>
+          </div>
+          <div class="stats-strip__spacer"></div>
+          <div class="stats-strip__actions">
             <button type="button" class="btn btn--primary btn--sm" id="quickOrdenBtn">
               <i class="fa-solid fa-plus"></i> Nueva Orden
             </button>
@@ -141,151 +172,119 @@
           </div>
         </div>
 
-        <!-- KPI primarios -->
-        <div class="kpi-grid">
-          <div class="kpi-card kpi-card--orange">
-            <div class="kpi-card__icon"><i class="fa-solid fa-gears"></i></div>
-            <div class="kpi-card__body">
-              <div class="kpi-card__value" id="statOrdenesActivas">—</div>
-              <div class="kpi-card__label">Órdenes Activas</div>
-            </div>
-          </div>
-          <div class="kpi-card kpi-card--blue">
-            <div class="kpi-card__icon"><i class="fa-solid fa-calendar-check"></i></div>
-            <div class="kpi-card__body">
-              <div class="kpi-card__value" id="statTurnosHoy">—</div>
-              <div class="kpi-card__label">Turnos Hoy</div>
-            </div>
-          </div>
-          <div class="kpi-card kpi-card--green">
-            <div class="kpi-card__icon"><i class="fa-solid fa-check-circle"></i></div>
-            <div class="kpi-card__body">
-              <div class="kpi-card__value" id="statOrdenesListas">—</div>
-              <div class="kpi-card__label">Listas p/ Entregar</div>
-            </div>
-          </div>
-          <div class="kpi-card kpi-card--red">
-            <div class="kpi-card__icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
-            <div class="kpi-card__body">
-              <div class="kpi-card__value" id="statStockBajo">—</div>
-              <div class="kpi-card__label">Stock Bajo / Crítico</div>
-            </div>
-          </div>
+        <!-- Fecha (set by JS) -->
+        <div class="dash-datebar">
+          <span id="dashDate" class="dash-datebar__date"></span>
         </div>
 
-        <!-- Stats secundarios -->
-        <div class="stat-cards">
-          <div class="stat-card">
-            <div class="stat-card__label">Ingresadas Hoy</div>
-            <div class="stat-card__value" id="statOrdenesHoy">—</div>
-            <div class="stat-card__icon"><i class="fa-solid fa-clipboard-list"></i></div>
+        <!-- SECCIÓN: Actividad reciente -->
+        <div class="dash-section">
+          <div class="dash-section__head">
+            <span class="dash-section__label">Actividad Reciente</span>
           </div>
-          <div class="stat-card">
-            <div class="stat-card__label">Mecánicos Activos</div>
-            <div class="stat-card__value" id="statMecanicos">—</div>
-            <div class="stat-card__icon"><i class="fa-solid fa-user-gear"></i></div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-card__label">Turnos Pendientes</div>
-            <div class="stat-card__value" id="statTurnosPendientes">—</div>
-            <div class="stat-card__icon"><i class="fa-solid fa-calendar-days"></i></div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-card__label">Total Órdenes</div>
-            <div class="stat-card__value" id="statTotalOrdenes">—</div>
-            <div class="stat-card__icon"><i class="fa-solid fa-layer-group"></i></div>
-          </div>
-        </div>
+          <div class="dash-cols">
 
-        <!-- Gráficos -->
-        <div class="charts-grid">
-          <div class="chart-card">
-            <div class="chart-card__header">
-              <div>
-                <div class="chart-card__title">Órdenes por Estado</div>
-                <div class="chart-card__subtitle">Distribución actual del flujo de trabajo</div>
+            <!-- Últimas órdenes -->
+            <div class="activity-col">
+              <div class="activity-col__head">
+                <span class="activity-col__title">Últimas Órdenes de Trabajo</span>
+                <button type="button" class="btn btn--sm btn--ghost" id="dashVerOrdenes">
+                  Ver todas <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+              <div class="table-scroll">
+                <table class="data-table">
+                  <thead>
+                    <tr><th>#OT</th><th>Cliente</th><th>Equipo</th><th>Estado</th><th>Ingreso</th></tr>
+                  </thead>
+                  <tbody id="dashOrdenesBody">
+                    <tr><td colspan="5" class="td-empty">Cargando...</td></tr>
+                  </tbody>
+                </table>
               </div>
             </div>
-            <canvas id="chartEstadosOT" height="260"></canvas>
-          </div>
-          <div class="chart-card">
-            <div class="chart-card__header">
-              <div>
-                <div class="chart-card__title">Consultas por Tipo de Equipo</div>
-                <div class="chart-card__subtitle">Solicitudes recibidas desde el sitio web</div>
+
+            <!-- Próximos turnos -->
+            <div class="activity-col">
+              <div class="activity-col__head">
+                <span class="activity-col__title">Próximos Turnos</span>
+                <button type="button" class="btn btn--sm btn--ghost" id="dashVerAgenda">
+                  Ver todos <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+              <div class="table-scroll">
+                <table class="data-table">
+                  <thead>
+                    <tr><th>Fecha / Hora</th><th>Cliente</th><th>Equipo</th><th>Estado</th></tr>
+                  </thead>
+                  <tbody id="dashTurnosBody">
+                    <tr><td colspan="4" class="td-empty">Cargando...</td></tr>
+                  </tbody>
+                </table>
               </div>
             </div>
-            <canvas id="chartMaquinas" height="260"></canvas>
+
           </div>
         </div>
 
-        <!-- Actividad reciente -->
-        <div class="dash-activity">
-          <div class="dash-activity__panel">
-            <div class="dash-activity__header">
-              <span class="dash-activity__title">Últimas Órdenes de Trabajo</span>
-              <button type="button" class="btn btn--sm btn--ghost" id="dashVerOrdenes">
-                Ver todo <i class="fa-solid fa-arrow-right"></i>
-              </button>
-            </div>
-            <div class="table-scroll">
-              <table class="data-table">
-                <thead>
-                  <tr>
-                    <th>#OT</th><th>Cliente</th><th>Equipo</th><th>Estado</th><th>Ingreso</th>
-                  </tr>
-                </thead>
-                <tbody id="dashOrdenesBody">
-                  <tr><td colspan="5" class="td-empty">Cargando...</td></tr>
-                </tbody>
-              </table>
-            </div>
+        <!-- SECCIÓN: Estadísticas -->
+        <div class="dash-section">
+          <div class="dash-section__head">
+            <span class="dash-section__label">Estadísticas</span>
           </div>
+          <div class="dash-cols">
 
-          <div class="dash-activity__panel">
-            <div class="dash-activity__header">
-              <span class="dash-activity__title">Próximos Turnos</span>
-              <button type="button" class="btn btn--sm btn--ghost" id="dashVerAgenda">
-                Ver todo <i class="fa-solid fa-arrow-right"></i>
-              </button>
+            <div class="chart-area">
+              <div class="chart-area__title">Órdenes por Estado</div>
+              <div class="chart-area__sub">Distribución actual del flujo de trabajo</div>
+              <canvas id="chartEstadosOT" height="220"></canvas>
             </div>
-            <div class="table-scroll">
-              <table class="data-table">
-                <thead>
-                  <tr>
-                    <th>Fecha / Hora</th><th>Cliente</th><th>Equipo</th><th>Estado</th>
-                  </tr>
-                </thead>
-                <tbody id="dashTurnosBody">
-                  <tr><td colspan="4" class="td-empty">Cargando...</td></tr>
-                </tbody>
-              </table>
+
+            <div class="chart-area">
+              <div class="chart-area__title">Consultas por Tipo de Equipo</div>
+              <div class="chart-area__sub">Solicitudes recibidas desde el sitio web</div>
+              <canvas id="chartMaquinas" height="220"></canvas>
             </div>
+
           </div>
         </div>
 
       </section>
 
-      <!-- ── ÓRDENES DE TRABAJO ──────────────────────────────────── -->
+      <!-- ══════════════════════════════════════════════════════════
+           ÓRDENES DE TRABAJO
+           ══════════════════════════════════════════════════════════ -->
       <section class="admin-panel" id="panel-ordenes">
-        <div class="data-table-wrapper">
-          <div class="data-table-header">
-            <div><div class="data-table-header__title">Órdenes de Trabajo</div></div>
-            <div class="data-table-actions">
-              <select id="filtroOrdenEstado" class="select-estado" aria-label="Filtrar por estado">
-                <option value="">Todos los estados</option>
-                <option value="recibido">Recibido</option>
-                <option value="diagnosticando">Diagnosticando</option>
-                <option value="reparando">Reparando</option>
-                <option value="listo">Listo</option>
-                <option value="entregado">Entregado</option>
-                <option value="cancelado">Cancelado</option>
-              </select>
-              <button type="button" class="btn btn--primary btn--sm" id="nuevaOrdenBtn">
-                <i class="fa-solid fa-plus"></i> Nueva Orden
-              </button>
-            </div>
+
+        <!-- Encabezado de sección -->
+        <div class="panel-head">
+          <h2 class="panel-head__title">Órdenes de Trabajo</h2>
+          <div class="panel-head__actions">
+            <button type="button" class="btn btn--primary btn--sm" id="nuevaOrdenBtn">
+              <i class="fa-solid fa-plus"></i> Nueva Orden
+            </button>
           </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="panel-filter">
+          <div class="toolbar-search">
+            <i class="toolbar-search__icon fa-solid fa-magnifying-glass"></i>
+            <input type="search" class="toolbar-search__input" id="ordenesBuscar" placeholder="Buscar cliente, equipo u OT..." />
+          </div>
+          <select id="filtroOrdenEstado" class="toolbar-select" aria-label="Estado">
+            <option value="">Todos los estados</option>
+            <option value="recibido">Recibido</option>
+            <option value="diagnosticando">Diagnosticando</option>
+            <option value="reparando">Reparando</option>
+            <option value="listo">Listo</option>
+            <option value="entregado">Entregado</option>
+            <option value="cancelado">Cancelado</option>
+          </select>
+        </div>
+
+        <!-- Tabla (sin wrapper tipo tarjeta) -->
+        <div class="panel-body">
           <div class="table-scroll">
             <table class="data-table" aria-label="Órdenes de trabajo">
               <thead>
@@ -299,133 +298,147 @@
           </div>
         </div>
 
-        <!-- Modal Orden -->
+        <!-- Panel lateral: Nueva / Editar Orden -->
         <div class="modal" id="ordenModal" role="dialog" aria-modal="true" aria-labelledby="ordenModalTitle">
           <div class="modal__overlay" id="ordenModalOverlay"></div>
           <div class="modal__content modal__content--xl">
-            <button type="button" class="modal__close" id="ordenModalClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-            <h3 class="modal__title" id="ordenModalTitle">Nueva Orden de Trabajo</h3>
-            <form id="ordenForm" novalidate>
-              <input type="hidden" id="ordenId" />
-              <div class="form__section">
-                <div class="form__section-title"><i class="fa-solid fa-user"></i> Datos del Cliente</div>
-                <div class="form__row">
-                  <div class="form__group">
-                    <label class="form__label" for="oNombre">Nombre del cliente *</label>
-                    <input type="text" class="form__input" id="oNombre" required placeholder="ej: Juan Pérez" />
-                  </div>
-                  <div class="form__group">
-                    <label class="form__label" for="oTelefono">Teléfono</label>
-                    <input type="tel" class="form__input" id="oTelefono" placeholder="ej: 381 400-1234" />
-                  </div>
-                </div>
-                <div class="form__group">
-                  <label class="form__label" for="oEmail">Email</label>
-                  <input type="email" class="form__input" id="oEmail" placeholder="cliente@mail.com" />
-                </div>
-              </div>
+            <div class="modal__header">
+              <h3 class="modal__title" id="ordenModalTitle">Nueva Orden</h3>
+              <button type="button" class="modal__close" id="ordenModalClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal__body">
+              <form id="ordenForm" novalidate>
+                <input type="hidden" id="ordenId" />
 
-              <div class="form__section">
-                <div class="form__section-title"><i class="fa-solid fa-wrench"></i> Equipo y Diagnóstico</div>
-                <div class="form__group">
-                  <label class="form__label" for="oVehiculo">Vehículo / Máquina *</label>
-                  <input type="text" class="form__input" id="oVehiculo" required placeholder="ej: Motosierra Stihl MS 250" />
+                <!-- Datos del cliente -->
+                <div class="form__block">
+                  <div class="form__block-title"><i class="fa-solid fa-user"></i> Datos del Cliente</div>
+                  <div class="form__row">
+                    <div class="form__group">
+                      <label class="form__label" for="oNombre">Nombre *</label>
+                      <input type="text" class="form__input" id="oNombre" required placeholder="ej: Juan Pérez" />
+                    </div>
+                    <div class="form__group">
+                      <label class="form__label" for="oTelefono">Teléfono</label>
+                      <input type="tel" class="form__input" id="oTelefono" placeholder="ej: 381 400-1234" />
+                    </div>
+                  </div>
+                  <div class="form__group">
+                    <label class="form__label" for="oEmail">Email</label>
+                    <input type="email" class="form__input" id="oEmail" placeholder="cliente@mail.com" />
+                  </div>
                 </div>
-                <div class="form__group">
-                  <label class="form__label" for="oProblema">Descripción del problema *</label>
-                  <textarea class="form__input form__textarea" id="oProblema" rows="2" required placeholder="Describí el problema reportado..."></textarea>
-                </div>
-                <div class="form__group">
-                  <label class="form__label" for="oDiagnostico">Diagnóstico técnico</label>
-                  <textarea class="form__input form__textarea" id="oDiagnostico" rows="2" placeholder="Causas identificadas por el mecánico..."></textarea>
-                </div>
-                <div class="form__group">
-                  <label class="form__label" for="oTrabajo">Trabajo realizado</label>
-                  <textarea class="form__input form__textarea" id="oTrabajo" rows="2" placeholder="Descripción de las reparaciones ejecutadas..."></textarea>
-                </div>
-              </div>
 
-              <div class="form__section">
-                <div class="form__section-title"><i class="fa-solid fa-user-gear"></i> Asignación y Estado</div>
-                <div class="form__row">
+                <!-- Equipo y diagnóstico -->
+                <div class="form__block">
+                  <div class="form__block-title"><i class="fa-solid fa-wrench"></i> Equipo y Diagnóstico</div>
                   <div class="form__group">
-                    <label class="form__label" for="oMecanico">Mecánico asignado</label>
-                    <select class="form__input" id="oMecanico"><option value="">— Sin asignar —</option></select>
+                    <label class="form__label" for="oVehiculo">Vehículo / Máquina *</label>
+                    <input type="text" class="form__input" id="oVehiculo" required placeholder="ej: Motosierra Stihl MS 250" />
                   </div>
                   <div class="form__group">
-                    <label class="form__label" for="oPrioridad">Prioridad</label>
-                    <select class="form__input" id="oPrioridad">
-                      <option value="baja">Baja</option>
-                      <option value="normal" selected>Normal</option>
-                      <option value="alta">Alta</option>
-                      <option value="urgente">Urgente</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form__row">
-                  <div class="form__group">
-                    <label class="form__label" for="oEstado">Estado</label>
-                    <select class="form__input" id="oEstado">
-                      <option value="recibido">Recibido</option>
-                      <option value="diagnosticando">Diagnosticando</option>
-                      <option value="reparando">Reparando</option>
-                      <option value="listo">Listo para entrega</option>
-                      <option value="entregado">Entregado</option>
-                      <option value="cancelado">Cancelado</option>
-                    </select>
+                    <label class="form__label" for="oProblema">Problema reportado *</label>
+                    <textarea class="form__input form__textarea" id="oProblema" rows="2" required placeholder="Describí el problema..."></textarea>
                   </div>
                   <div class="form__group">
-                    <label class="form__label" for="oFechaEst">Fecha estimada entrega</label>
-                    <input type="date" class="form__input" id="oFechaEst" />
+                    <label class="form__label" for="oDiagnostico">Diagnóstico técnico</label>
+                    <textarea class="form__input form__textarea" id="oDiagnostico" rows="2" placeholder="Causas identificadas..."></textarea>
+                  </div>
+                  <div class="form__group">
+                    <label class="form__label" for="oTrabajo">Trabajo realizado</label>
+                    <textarea class="form__input form__textarea" id="oTrabajo" rows="2" placeholder="Reparaciones ejecutadas..."></textarea>
                   </div>
                 </div>
-              </div>
 
-              <div class="form__section">
-                <div class="form__section-title"><i class="fa-solid fa-dollar-sign"></i> Costos</div>
-                <div class="form__row form__row--3">
-                  <div class="form__group">
-                    <label class="form__label" for="oCostoMO">Mano de obra ($)</label>
-                    <input type="number" class="form__input" id="oCostoMO" min="0" step="100" value="0" />
+                <!-- Asignación y estado -->
+                <div class="form__block">
+                  <div class="form__block-title"><i class="fa-solid fa-user-gear"></i> Asignación y Estado</div>
+                  <div class="form__row">
+                    <div class="form__group">
+                      <label class="form__label" for="oMecanico">Mecánico asignado</label>
+                      <select class="form__input" id="oMecanico"><option value="">— Sin asignar —</option></select>
+                    </div>
+                    <div class="form__group">
+                      <label class="form__label" for="oPrioridad">Prioridad</label>
+                      <select class="form__input" id="oPrioridad">
+                        <option value="baja">Baja</option>
+                        <option value="normal" selected>Normal</option>
+                        <option value="alta">Alta</option>
+                        <option value="urgente">Urgente</option>
+                      </select>
+                    </div>
                   </div>
-                  <div class="form__group">
-                    <label class="form__label" for="oCostoRep">Repuestos ($)</label>
-                    <input type="number" class="form__input" id="oCostoRep" min="0" step="100" value="0" />
-                  </div>
-                  <div class="form__group">
-                    <label class="form__label">Total ($)</label>
-                    <div class="form__total" id="oTotal">$ 0</div>
+                  <div class="form__row">
+                    <div class="form__group">
+                      <label class="form__label" for="oEstado">Estado</label>
+                      <select class="form__input" id="oEstado">
+                        <option value="recibido">Recibido</option>
+                        <option value="diagnosticando">Diagnosticando</option>
+                        <option value="reparando">Reparando</option>
+                        <option value="listo">Listo para entrega</option>
+                        <option value="entregado">Entregado</option>
+                        <option value="cancelado">Cancelado</option>
+                      </select>
+                    </div>
+                    <div class="form__group">
+                      <label class="form__label" for="oFechaEst">Fecha estimada entrega</label>
+                      <input type="date" class="form__input" id="oFechaEst" />
+                    </div>
                   </div>
                 </div>
-                <div class="form__group">
-                  <label class="form__label" for="oNotas">Notas internas</label>
-                  <textarea class="form__input form__textarea" id="oNotas" rows="2" placeholder="Notas visibles solo para el equipo..."></textarea>
+
+                <!-- Costos -->
+                <div class="form__block">
+                  <div class="form__block-title"><i class="fa-solid fa-dollar-sign"></i> Costos</div>
+                  <div class="form__row form__row--3">
+                    <div class="form__group">
+                      <label class="form__label" for="oCostoMO">Mano de obra ($)</label>
+                      <input type="number" class="form__input" id="oCostoMO" min="0" step="100" value="0" />
+                    </div>
+                    <div class="form__group">
+                      <label class="form__label" for="oCostoRep">Repuestos ($)</label>
+                      <input type="number" class="form__input" id="oCostoRep" min="0" step="100" value="0" />
+                    </div>
+                    <div class="form__group">
+                      <label class="form__label">Total ($)</label>
+                      <div class="form__total" id="oTotal">$ 0</div>
+                    </div>
+                  </div>
+                  <div class="form__group">
+                    <label class="form__label" for="oNotas">Notas internas</label>
+                    <textarea class="form__input form__textarea" id="oNotas" rows="2" placeholder="Notas para el equipo..."></textarea>
+                  </div>
                 </div>
-              </div>
 
-              <div class="form__actions">
-                <button type="button" class="btn btn--secondary" id="ordenModalCancel">Cancelar</button>
-                <button type="submit" class="btn btn--primary" id="ordenFormSubmit">
-                  <span id="ordenSubmitText">Guardar Orden</span>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── AGENDA ────────────────────────────────────────────── -->
-      <section class="admin-panel" id="panel-agenda">
-        <div class="data-table-wrapper">
-          <div class="data-table-header">
-            <div><div class="data-table-header__title">Agenda de Turnos</div></div>
-            <div class="data-table-actions">
-              <div class="loader loader--inline" id="agendaLoader"><div class="loader__spinner loader__spinner--sm"></div></div>
-              <button type="button" class="btn btn--primary btn--sm" id="nuevoTurnoBtn">
-                <i class="fa-solid fa-calendar-plus"></i> Nuevo Turno
+              </form>
+            </div>
+            <div class="form__actions">
+              <button type="button" class="btn btn--secondary" id="ordenModalCancel">Cancelar</button>
+              <button type="button" class="btn btn--primary" id="ordenFormSubmit" onclick="document.getElementById('ordenForm').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}))">
+                <span id="ordenSubmitText">Guardar Orden</span>
               </button>
             </div>
           </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           AGENDA DE TURNOS
+           ══════════════════════════════════════════════════════════ -->
+      <section class="admin-panel" id="panel-agenda">
+
+        <div class="panel-head">
+          <h2 class="panel-head__title">Agenda de Turnos</h2>
+          <div class="panel-head__actions">
+            <div class="loader loader--inline" id="agendaLoader"><div class="loader__spinner loader__spinner--sm"></div></div>
+            <button type="button" class="btn btn--primary btn--sm" id="nuevoTurnoBtn">
+              <i class="fa-solid fa-calendar-plus"></i> Nuevo Turno
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-body">
           <div class="table-scroll">
             <table class="data-table" aria-label="Agenda de turnos">
               <thead>
@@ -439,76 +452,91 @@
           </div>
         </div>
 
-        <!-- Modal Turno -->
+        <!-- Panel lateral: Nuevo / Editar Turno -->
         <div class="modal" id="turnoModal" role="dialog" aria-modal="true" aria-labelledby="turnoModalTitle">
           <div class="modal__overlay" id="turnoModalOverlay"></div>
           <div class="modal__content modal__content--lg">
-            <button type="button" class="modal__close" id="turnoModalClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-            <h3 class="modal__title" id="turnoModalTitle">Nuevo Turno</h3>
-            <form id="turnoForm" novalidate>
-              <input type="hidden" id="turnoId" />
-              <div class="form__row">
-                <div class="form__group">
-                  <label class="form__label" for="tNombre">Nombre del cliente *</label>
-                  <input type="text" class="form__input" id="tNombre" required />
+            <div class="modal__header">
+              <h3 class="modal__title" id="turnoModalTitle">Nuevo Turno</h3>
+              <button type="button" class="modal__close" id="turnoModalClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal__body">
+              <form id="turnoForm" novalidate>
+                <input type="hidden" id="turnoId" />
+                <div class="form__block">
+                  <div class="form__block-title"><i class="fa-solid fa-user"></i> Datos del Cliente</div>
+                  <div class="form__row">
+                    <div class="form__group">
+                      <label class="form__label" for="tNombre">Nombre *</label>
+                      <input type="text" class="form__input" id="tNombre" required />
+                    </div>
+                    <div class="form__group">
+                      <label class="form__label" for="tTelefono">Teléfono</label>
+                      <input type="tel" class="form__input" id="tTelefono" />
+                    </div>
+                  </div>
+                  <div class="form__group">
+                    <label class="form__label" for="tEmail">Email</label>
+                    <input type="email" class="form__input" id="tEmail" />
+                  </div>
                 </div>
-                <div class="form__group">
-                  <label class="form__label" for="tTelefono">Teléfono</label>
-                  <input type="tel" class="form__input" id="tTelefono" />
+                <div class="form__block">
+                  <div class="form__block-title"><i class="fa-solid fa-calendar-days"></i> Detalles del Turno</div>
+                  <div class="form__group">
+                    <label class="form__label" for="tVehiculo">Equipo / Vehículo *</label>
+                    <input type="text" class="form__input" id="tVehiculo" required />
+                  </div>
+                  <div class="form__group">
+                    <label class="form__label" for="tServicio">Servicio *</label>
+                    <input type="text" class="form__input" id="tServicio" required />
+                  </div>
+                  <div class="form__row">
+                    <div class="form__group">
+                      <label class="form__label" for="tFecha">Fecha *</label>
+                      <input type="date" class="form__input" id="tFecha" required />
+                    </div>
+                    <div class="form__group">
+                      <label class="form__label" for="tHora">Hora *</label>
+                      <input type="time" class="form__input" id="tHora" required />
+                    </div>
+                  </div>
+                  <div class="form__group">
+                    <label class="form__label" for="tMecanico">Mecánico asignado</label>
+                    <select class="form__input" id="tMecanico"><option value="">— Sin asignar —</option></select>
+                  </div>
+                  <div class="form__group">
+                    <label class="form__label" for="tNotas">Notas</label>
+                    <textarea class="form__input form__textarea" id="tNotas" rows="2"></textarea>
+                  </div>
                 </div>
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="tEmail">Email</label>
-                <input type="email" class="form__input" id="tEmail" />
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="tVehiculo">Equipo / Vehículo *</label>
-                <input type="text" class="form__input" id="tVehiculo" required />
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="tServicio">Servicio *</label>
-                <input type="text" class="form__input" id="tServicio" required />
-              </div>
-              <div class="form__row">
-                <div class="form__group">
-                  <label class="form__label" for="tFecha">Fecha *</label>
-                  <input type="date" class="form__input" id="tFecha" required />
-                </div>
-                <div class="form__group">
-                  <label class="form__label" for="tHora">Hora *</label>
-                  <input type="time" class="form__input" id="tHora" required />
-                </div>
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="tMecanico">Mecánico asignado</label>
-                <select class="form__input" id="tMecanico"><option value="">— Sin asignar —</option></select>
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="tNotas">Notas</label>
-                <textarea class="form__input form__textarea" id="tNotas" rows="2"></textarea>
-              </div>
-              <div class="form__actions">
-                <button type="button" class="btn btn--secondary" id="turnoModalCancel">Cancelar</button>
-                <button type="submit" class="btn btn--primary" id="turnoFormSubmit">
-                  <span id="turnoSubmitText">Guardar Turno</span>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── MECÁNICOS ─────────────────────────────────────────── -->
-      <section class="admin-panel" id="panel-mecanicos">
-        <div class="data-table-wrapper">
-          <div class="data-table-header">
-            <div><div class="data-table-header__title">Mecánicos</div></div>
-            <div class="data-table-actions">
-              <button type="button" class="btn btn--primary btn--sm" id="nuevoMecanicoBtn">
-                <i class="fa-solid fa-user-plus"></i> Nuevo Mecánico
+              </form>
+            </div>
+            <div class="form__actions">
+              <button type="button" class="btn btn--secondary" id="turnoModalCancel">Cancelar</button>
+              <button type="button" class="btn btn--primary" id="turnoFormSubmit" onclick="document.getElementById('turnoForm').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}))">
+                <span id="turnoSubmitText">Guardar Turno</span>
               </button>
             </div>
           </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           MECÁNICOS
+           ══════════════════════════════════════════════════════════ -->
+      <section class="admin-panel" id="panel-mecanicos">
+
+        <div class="panel-head">
+          <h2 class="panel-head__title">Mecánicos</h2>
+          <div class="panel-head__actions">
+            <button type="button" class="btn btn--primary btn--sm" id="nuevoMecanicoBtn">
+              <i class="fa-solid fa-user-plus"></i> Nuevo Mecánico
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-body">
           <div class="table-scroll">
             <table class="data-table" aria-label="Mecánicos">
               <thead>
@@ -519,64 +547,76 @@
           </div>
         </div>
 
-        <!-- Modal Mecánico -->
+        <!-- Panel lateral: Nuevo / Editar Mecánico -->
         <div class="modal" id="mecanicoModal" role="dialog" aria-modal="true" aria-labelledby="mecanicoModalTitle">
           <div class="modal__overlay" id="mecanicoModalOverlay"></div>
           <div class="modal__content">
-            <button type="button" class="modal__close" id="mecanicoModalClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-            <h3 class="modal__title" id="mecanicoModalTitle">Nuevo Mecánico</h3>
-            <form id="mecanicoForm" novalidate>
-              <input type="hidden" id="mecanicoId" />
-              <div class="form__row">
-                <div class="form__group">
-                  <label class="form__label" for="mNombre">Nombre *</label>
-                  <input type="text" class="form__input" id="mNombre" required />
+            <div class="modal__header">
+              <h3 class="modal__title" id="mecanicoModalTitle">Nuevo Mecánico</h3>
+              <button type="button" class="modal__close" id="mecanicoModalClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal__body">
+              <form id="mecanicoForm" novalidate>
+                <input type="hidden" id="mecanicoId" />
+                <div class="form__block">
+                  <div class="form__block-title"><i class="fa-solid fa-id-card"></i> Datos Personales</div>
+                  <div class="form__row">
+                    <div class="form__group">
+                      <label class="form__label" for="mNombre">Nombre *</label>
+                      <input type="text" class="form__input" id="mNombre" required />
+                    </div>
+                    <div class="form__group">
+                      <label class="form__label" for="mApellido">Apellido *</label>
+                      <input type="text" class="form__input" id="mApellido" required />
+                    </div>
+                  </div>
+                  <div class="form__row">
+                    <div class="form__group">
+                      <label class="form__label" for="mTelefono">Teléfono</label>
+                      <input type="tel" class="form__input" id="mTelefono" />
+                    </div>
+                    <div class="form__group">
+                      <label class="form__label" for="mEmail">Email</label>
+                      <input type="email" class="form__input" id="mEmail" />
+                    </div>
+                  </div>
+                  <div class="form__group">
+                    <label class="form__label" for="mEspecialidad">Especialidad</label>
+                    <input type="text" class="form__input" id="mEspecialidad" placeholder="ej: Motosierras, Generadores" />
+                  </div>
+                  <div class="form__group form__group--check">
+                    <input type="checkbox" id="mActivo" checked />
+                    <label for="mActivo">Mecánico activo</label>
+                  </div>
                 </div>
-                <div class="form__group">
-                  <label class="form__label" for="mApellido">Apellido *</label>
-                  <input type="text" class="form__input" id="mApellido" required />
-                </div>
-              </div>
-              <div class="form__row">
-                <div class="form__group">
-                  <label class="form__label" for="mTelefono">Teléfono</label>
-                  <input type="tel" class="form__input" id="mTelefono" />
-                </div>
-                <div class="form__group">
-                  <label class="form__label" for="mEmail">Email</label>
-                  <input type="email" class="form__input" id="mEmail" />
-                </div>
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="mEspecialidad">Especialidad</label>
-                <input type="text" class="form__input" id="mEspecialidad" placeholder="ej: Motosierras, Generadores" />
-              </div>
-              <div class="form__group form__group--check">
-                <input type="checkbox" id="mActivo" checked />
-                <label for="mActivo">Mecánico activo</label>
-              </div>
-              <div class="form__actions">
-                <button type="button" class="btn btn--secondary" id="mecanicoModalCancel">Cancelar</button>
-                <button type="submit" class="btn btn--primary" id="mecanicoFormSubmit">
-                  <span id="mecanicoSubmitText">Guardar</span>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── INVENTARIO ─────────────────────────────────────────── -->
-      <section class="admin-panel" id="panel-inventario">
-        <div class="data-table-wrapper">
-          <div class="data-table-header">
-            <div><div class="data-table-header__title">Inventario de Repuestos</div></div>
-            <div class="data-table-actions">
-              <button type="button" class="btn btn--primary btn--sm" id="nuevoRepuestoBtn">
-                <i class="fa-solid fa-plus"></i> Nuevo Repuesto
+              </form>
+            </div>
+            <div class="form__actions">
+              <button type="button" class="btn btn--secondary" id="mecanicoModalCancel">Cancelar</button>
+              <button type="button" class="btn btn--primary" id="mecanicoFormSubmit" onclick="document.getElementById('mecanicoForm').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}))">
+                <span id="mecanicoSubmitText">Guardar</span>
               </button>
             </div>
           </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           INVENTARIO DE REPUESTOS
+           ══════════════════════════════════════════════════════════ -->
+      <section class="admin-panel" id="panel-inventario">
+
+        <div class="panel-head">
+          <h2 class="panel-head__title">Inventario de Repuestos</h2>
+          <div class="panel-head__actions">
+            <button type="button" class="btn btn--primary btn--sm" id="nuevoRepuestoBtn">
+              <i class="fa-solid fa-plus"></i> Nuevo Repuesto
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-body">
           <div class="table-scroll">
             <table class="data-table" aria-label="Inventario">
               <thead>
@@ -587,115 +627,143 @@
           </div>
         </div>
 
-        <!-- Modal Repuesto -->
+        <!-- Panel lateral: Nuevo / Editar Repuesto -->
         <div class="modal" id="repuestoModal" role="dialog" aria-modal="true" aria-labelledby="repuestoModalTitle">
           <div class="modal__overlay" id="repuestoModalOverlay"></div>
           <div class="modal__content modal__content--lg">
-            <button type="button" class="modal__close" id="repuestoModalClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-            <h3 class="modal__title" id="repuestoModalTitle">Nuevo Repuesto</h3>
-            <form id="repuestoForm" novalidate>
-              <input type="hidden" id="repuestoId" />
-              <div class="form__row">
-                <div class="form__group">
-                  <label class="form__label" for="rCodigo">Código *</label>
-                  <input type="text" class="form__input" id="rCodigo" required placeholder="ej: FIL-001" />
-                </div>
-                <div class="form__group">
-                  <label class="form__label" for="rCategoria">Categoría</label>
-                  <input type="text" class="form__input" id="rCategoria" placeholder="ej: Filtros, Encendido" />
-                </div>
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="rNombre">Nombre del repuesto *</label>
-                <input type="text" class="form__input" id="rNombre" required />
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="rDescripcion">Descripción</label>
-                <textarea class="form__input form__textarea" id="rDescripcion" rows="2"></textarea>
-              </div>
-              <div class="form__row form__row--3">
-                <div class="form__group">
-                  <label class="form__label" for="rStock">Stock actual</label>
-                  <input type="number" class="form__input" id="rStock" min="0" value="0" />
-                </div>
-                <div class="form__group">
-                  <label class="form__label" for="rStockMin">Stock mínimo</label>
-                  <input type="number" class="form__input" id="rStockMin" min="0" value="5" />
-                </div>
-                <div class="form__group">
-                  <label class="form__label" for="rUbicacion">Ubicación</label>
-                  <input type="text" class="form__input" id="rUbicacion" placeholder="ej: Estante A1" />
-                </div>
-              </div>
-              <div class="form__row">
-                <div class="form__group">
-                  <label class="form__label" for="rPrecioCosto">Precio costo ($)</label>
-                  <input type="number" class="form__input" id="rPrecioCosto" min="0" step="10" value="0" />
-                </div>
-                <div class="form__group">
-                  <label class="form__label" for="rPrecioVenta">Precio venta ($)</label>
-                  <input type="number" class="form__input" id="rPrecioVenta" min="0" step="10" value="0" />
-                </div>
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="rProveedor">Proveedor</label>
-                <input type="text" class="form__input" id="rProveedor" />
-              </div>
-              <div class="form__actions">
-                <button type="button" class="btn btn--secondary" id="repuestoModalCancel">Cancelar</button>
-                <button type="submit" class="btn btn--primary" id="repuestoFormSubmit">
-                  <span id="repuestoSubmitText">Guardar</span>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        <!-- Modal Stock -->
-        <div class="modal" id="stockModal" role="dialog" aria-modal="true" aria-labelledby="stockModalTitle">
-          <div class="modal__overlay" id="stockModalOverlay"></div>
-          <div class="modal__content modal__content--sm">
-            <button type="button" class="modal__close" id="stockModalClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-            <h3 class="modal__title" id="stockModalTitle">Ajustar Stock</h3>
-            <div class="stock-adjust">
-              <div class="stock-adjust__info">
-                <span class="modal-label">Repuesto</span>
-                <p class="modal-value" id="stockRepuestoNombre">—</p>
-                <span class="modal-label">Stock actual</span>
-                <p class="modal-value" id="stockActual">—</p>
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="stockTipo">Tipo de movimiento</label>
-                <select class="form__input" id="stockTipo">
-                  <option value="entrada">Entrada (agregar stock)</option>
-                  <option value="salida">Salida (restar stock)</option>
-                </select>
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="stockCantidad">Cantidad</label>
-                <input type="number" class="form__input" id="stockCantidad" min="1" value="1" />
-              </div>
-              <div class="form__actions">
-                <button type="button" class="btn btn--secondary" id="stockModalCancel">Cancelar</button>
-                <button type="button" class="btn btn--primary" id="stockConfirmar">Confirmar</button>
-              </div>
+            <div class="modal__header">
+              <h3 class="modal__title" id="repuestoModalTitle">Nuevo Repuesto</h3>
+              <button type="button" class="modal__close" id="repuestoModalClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── CLIENTES ───────────────────────────────────────────── -->
-      <section class="admin-panel" id="panel-clientes">
-        <div class="data-table-wrapper">
-          <div class="data-table-header">
-            <div><div class="data-table-header__title">Clientes</div></div>
-            <div class="data-table-actions">
-              <input type="search" class="form__input" id="clientesBuscar" placeholder="Buscar por nombre, email o teléfono" style="max-width:280px" />
-              <button type="button" class="btn btn--secondary btn--sm" id="recargarClientes">
-                <i class="fa-solid fa-rotate-right"></i> Recargar
+            <div class="modal__body">
+              <form id="repuestoForm" novalidate>
+                <input type="hidden" id="repuestoId" />
+                <div class="form__block">
+                  <div class="form__block-title"><i class="fa-solid fa-tag"></i> Identificación</div>
+                  <div class="form__row">
+                    <div class="form__group">
+                      <label class="form__label" for="rCodigo">Código *</label>
+                      <input type="text" class="form__input" id="rCodigo" required placeholder="ej: FIL-001" />
+                    </div>
+                    <div class="form__group">
+                      <label class="form__label" for="rCategoria">Categoría</label>
+                      <input type="text" class="form__input" id="rCategoria" placeholder="ej: Filtros" />
+                    </div>
+                  </div>
+                  <div class="form__group">
+                    <label class="form__label" for="rNombre">Nombre del repuesto *</label>
+                    <input type="text" class="form__input" id="rNombre" required />
+                  </div>
+                  <div class="form__group">
+                    <label class="form__label" for="rDescripcion">Descripción</label>
+                    <textarea class="form__input form__textarea" id="rDescripcion" rows="2"></textarea>
+                  </div>
+                </div>
+                <div class="form__block">
+                  <div class="form__block-title"><i class="fa-solid fa-boxes-stacked"></i> Stock y Ubicación</div>
+                  <div class="form__row form__row--3">
+                    <div class="form__group">
+                      <label class="form__label" for="rStock">Stock actual</label>
+                      <input type="number" class="form__input" id="rStock" min="0" value="0" />
+                    </div>
+                    <div class="form__group">
+                      <label class="form__label" for="rStockMin">Stock mínimo</label>
+                      <input type="number" class="form__input" id="rStockMin" min="0" value="5" />
+                    </div>
+                    <div class="form__group">
+                      <label class="form__label" for="rUbicacion">Ubicación</label>
+                      <input type="text" class="form__input" id="rUbicacion" placeholder="ej: Estante A1" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form__block">
+                  <div class="form__block-title"><i class="fa-solid fa-dollar-sign"></i> Precios y Proveedor</div>
+                  <div class="form__row">
+                    <div class="form__group">
+                      <label class="form__label" for="rPrecioCosto">Precio costo ($)</label>
+                      <input type="number" class="form__input" id="rPrecioCosto" min="0" step="10" value="0" />
+                    </div>
+                    <div class="form__group">
+                      <label class="form__label" for="rPrecioVenta">Precio venta ($)</label>
+                      <input type="number" class="form__input" id="rPrecioVenta" min="0" step="10" value="0" />
+                    </div>
+                  </div>
+                  <div class="form__group">
+                    <label class="form__label" for="rProveedor">Proveedor</label>
+                    <input type="text" class="form__input" id="rProveedor" />
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="form__actions">
+              <button type="button" class="btn btn--secondary" id="repuestoModalCancel">Cancelar</button>
+              <button type="button" class="btn btn--primary" id="repuestoFormSubmit" onclick="document.getElementById('repuestoForm').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}))">
+                <span id="repuestoSubmitText">Guardar</span>
               </button>
             </div>
           </div>
+        </div>
+
+        <!-- Panel lateral: Ajuste de Stock -->
+        <div class="modal" id="stockModal" role="dialog" aria-modal="true" aria-labelledby="stockModalTitle">
+          <div class="modal__overlay" id="stockModalOverlay"></div>
+          <div class="modal__content modal__content--sm">
+            <div class="modal__header">
+              <h3 class="modal__title" id="stockModalTitle">Ajustar Stock</h3>
+              <button type="button" class="modal__close" id="stockModalClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal__body">
+              <div class="stock-adjust">
+                <div class="stock-adjust__info">
+                  <span class="modal-label">Repuesto</span>
+                  <p class="modal-value" id="stockRepuestoNombre">—</p>
+                  <span class="modal-label">Stock actual</span>
+                  <p class="modal-value" id="stockActual">—</p>
+                </div>
+                <div class="form__group">
+                  <label class="form__label" for="stockTipo">Tipo de movimiento</label>
+                  <select class="form__input" id="stockTipo">
+                    <option value="entrada">Entrada — agregar stock</option>
+                    <option value="salida">Salida — restar stock</option>
+                  </select>
+                </div>
+                <div class="form__group">
+                  <label class="form__label" for="stockCantidad">Cantidad</label>
+                  <input type="number" class="form__input" id="stockCantidad" min="1" value="1" />
+                </div>
+              </div>
+            </div>
+            <div class="form__actions">
+              <button type="button" class="btn btn--secondary" id="stockModalCancel">Cancelar</button>
+              <button type="button" class="btn btn--primary" id="stockConfirmar">Confirmar</button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           CLIENTES
+           ══════════════════════════════════════════════════════════ -->
+      <section class="admin-panel" id="panel-clientes">
+
+        <div class="panel-head">
+          <h2 class="panel-head__title">Clientes</h2>
+          <div class="panel-head__actions">
+            <button type="button" class="btn btn--secondary btn--sm" id="recargarClientes">
+              <i class="fa-solid fa-rotate-right"></i> Recargar
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-filter">
+          <div class="toolbar-search">
+            <i class="toolbar-search__icon fa-solid fa-magnifying-glass"></i>
+            <input type="search" class="toolbar-search__input" id="clientesBuscar" placeholder="Buscar por nombre, email o teléfono..." />
+          </div>
+        </div>
+
+        <div class="panel-body">
           <div class="table-scroll">
             <table class="data-table" aria-label="Clientes">
               <thead>
@@ -705,30 +773,41 @@
             </table>
           </div>
         </div>
+
       </section>
 
-      <!-- ── CONTACTOS ──────────────────────────────────────────── -->
+      <!-- ══════════════════════════════════════════════════════════
+           CONTACTOS / LEADS
+           ══════════════════════════════════════════════════════════ -->
       <section class="admin-panel" id="panel-contactos">
-        <div class="data-table-wrapper">
-          <div class="data-table-header">
-            <div><div class="data-table-header__title">Contactos / Leads</div></div>
-            <div class="data-table-actions">
-              <input type="search" class="form__input" id="contactosBuscar" placeholder="Buscar por nombre, email o máquina" style="max-width:240px" />
-              <select class="select-estado" id="contactosEstado" aria-label="Filtrar por estado">
-                <option value="">Todos</option>
-                <option value="nuevo">Nuevo</option>
-                <option value="en_proceso">En proceso</option>
-                <option value="resuelto">Resuelto</option>
-                <option value="cerrado">Cerrado</option>
-              </select>
-              <button type="button" class="btn btn--secondary btn--sm" id="recargarContactos">
-                <i class="fa-solid fa-rotate-right"></i>
-              </button>
-              <button type="button" class="btn btn--primary btn--sm" id="nuevoContactoBtn">
-                <i class="fa-solid fa-plus"></i> Nuevo
-              </button>
-            </div>
+
+        <div class="panel-head">
+          <h2 class="panel-head__title">Contactos / Leads</h2>
+          <div class="panel-head__actions">
+            <button type="button" class="btn btn--secondary btn--sm" id="recargarContactos">
+              <i class="fa-solid fa-rotate-right"></i>
+            </button>
+            <button type="button" class="btn btn--primary btn--sm" id="nuevoContactoBtn">
+              <i class="fa-solid fa-plus"></i> Nuevo
+            </button>
           </div>
+        </div>
+
+        <div class="panel-filter">
+          <div class="toolbar-search">
+            <i class="toolbar-search__icon fa-solid fa-magnifying-glass"></i>
+            <input type="search" class="toolbar-search__input" id="contactosBuscar" placeholder="Buscar por nombre, email o máquina..." />
+          </div>
+          <select class="toolbar-select" id="contactosEstado" aria-label="Estado">
+            <option value="">Todos</option>
+            <option value="nuevo">Nuevo</option>
+            <option value="en_proceso">En proceso</option>
+            <option value="resuelto">Resuelto</option>
+            <option value="cerrado">Cerrado</option>
+          </select>
+        </div>
+
+        <div class="panel-body">
           <div class="table-scroll">
             <table class="data-table" aria-label="Contactos">
               <thead>
@@ -739,72 +818,87 @@
           </div>
         </div>
 
-        <!-- Modal Contacto -->
+        <!-- Panel lateral: Contacto -->
         <div class="modal" id="contactoModal" role="dialog" aria-modal="true" aria-labelledby="contactoModalTitle">
           <div class="modal__overlay" id="contactoModalOverlay"></div>
           <div class="modal__content modal__content--lg">
-            <button type="button" class="modal__close" id="contactoModalClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-            <h3 class="modal__title" id="contactoModalTitle">Detalle de Contacto</h3>
-            <form id="contactoForm" novalidate>
-              <input type="hidden" id="contactoId" />
-              <div class="form__row">
-                <div class="form__group">
-                  <label class="form__label" for="cNombre">Nombre *</label>
-                  <input type="text" class="form__input" id="cNombre" required />
+            <div class="modal__header">
+              <h3 class="modal__title" id="contactoModalTitle">Contacto</h3>
+              <button type="button" class="modal__close" id="contactoModalClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal__body">
+              <form id="contactoForm" novalidate>
+                <input type="hidden" id="contactoId" />
+                <div class="form__block">
+                  <div class="form__block-title"><i class="fa-solid fa-user"></i> Datos del Contacto</div>
+                  <div class="form__row">
+                    <div class="form__group">
+                      <label class="form__label" for="cNombre">Nombre *</label>
+                      <input type="text" class="form__input" id="cNombre" required />
+                    </div>
+                    <div class="form__group">
+                      <label class="form__label" for="cApellido">Apellido *</label>
+                      <input type="text" class="form__input" id="cApellido" required />
+                    </div>
+                  </div>
+                  <div class="form__group">
+                    <label class="form__label" for="cEmail">Email *</label>
+                    <input type="email" class="form__input" id="cEmail" required />
+                  </div>
+                  <div class="form__group">
+                    <label class="form__label" for="cTelefono">Teléfono *</label>
+                    <input type="tel" class="form__input" id="cTelefono" required />
+                  </div>
                 </div>
-                <div class="form__group">
-                  <label class="form__label" for="cApellido">Apellido *</label>
-                  <input type="text" class="form__input" id="cApellido" required />
+                <div class="form__block">
+                  <div class="form__block-title"><i class="fa-solid fa-wrench"></i> Consulta</div>
+                  <div class="form__group">
+                    <label class="form__label" for="cMaquina">Tipo de máquina *</label>
+                    <input type="text" class="form__input" id="cMaquina" required />
+                  </div>
+                  <div class="form__group">
+                    <label class="form__label" for="cDescripcion">Descripción *</label>
+                    <textarea class="form__input form__textarea" id="cDescripcion" rows="3" required></textarea>
+                  </div>
+                  <div class="form__group">
+                    <label class="form__label" for="cEstado">Estado</label>
+                    <select class="form__input" id="cEstado">
+                      <option value="nuevo">Nuevo</option>
+                      <option value="en_proceso">En proceso</option>
+                      <option value="resuelto">Resuelto</option>
+                      <option value="cerrado">Cerrado</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="cEmail">Email *</label>
-                <input type="email" class="form__input" id="cEmail" required />
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="cTelefono">Teléfono *</label>
-                <input type="tel" class="form__input" id="cTelefono" required />
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="cMaquina">Tipo de máquina *</label>
-                <input type="text" class="form__input" id="cMaquina" required />
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="cDescripcion">Descripción *</label>
-                <textarea class="form__input form__textarea" id="cDescripcion" rows="3" required></textarea>
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="cEstado">Estado</label>
-                <select class="form__input" id="cEstado">
-                  <option value="nuevo">Nuevo</option>
-                  <option value="en_proceso">En proceso</option>
-                  <option value="resuelto">Resuelto</option>
-                  <option value="cerrado">Cerrado</option>
-                </select>
-              </div>
-              <div class="form__actions">
-                <button type="button" class="btn btn--secondary" id="contactoModalCancel">Cancelar</button>
-                <button type="submit" class="btn btn--primary" id="contactoFormSubmit">
-                  <span id="contactoSubmitText">Guardar contacto</span>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── SERVICIOS ──────────────────────────────────────────── -->
-      <section class="admin-panel" id="panel-servicios">
-        <div class="data-table-wrapper">
-          <div class="data-table-header">
-            <div><div class="data-table-header__title">Catálogo de Servicios</div></div>
-            <div class="data-table-actions">
-              <div class="loader loader--inline" id="serviciosLoader"><div class="loader__spinner loader__spinner--sm"></div></div>
-              <button type="button" class="btn btn--primary btn--sm" id="nuevoServicioBtn">
-                <i class="fa-solid fa-plus"></i> Nuevo Servicio
+              </form>
+            </div>
+            <div class="form__actions">
+              <button type="button" class="btn btn--secondary" id="contactoModalCancel">Cancelar</button>
+              <button type="button" class="btn btn--primary" id="contactoFormSubmit" onclick="document.getElementById('contactoForm').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}))">
+                <span id="contactoSubmitText">Guardar contacto</span>
               </button>
             </div>
           </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           CATÁLOGO DE SERVICIOS
+           ══════════════════════════════════════════════════════════ -->
+      <section class="admin-panel" id="panel-servicios">
+
+        <div class="panel-head">
+          <h2 class="panel-head__title">Catálogo de Servicios</h2>
+          <div class="panel-head__actions">
+            <div class="loader loader--inline" id="serviciosLoader"><div class="loader__spinner loader__spinner--sm"></div></div>
+            <button type="button" class="btn btn--primary btn--sm" id="nuevoServicioBtn">
+              <i class="fa-solid fa-plus"></i> Nuevo Servicio
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-body">
           <div class="table-scroll">
             <table class="data-table" aria-label="Servicios">
               <thead>
@@ -815,83 +909,92 @@
           </div>
         </div>
 
-        <!-- Modal Servicio -->
+        <!-- Panel lateral: Nuevo / Editar Servicio -->
         <div class="modal" id="servicioModal" role="dialog" aria-modal="true" aria-labelledby="servicioModalTitle">
           <div class="modal__overlay" id="servicioModalOverlay"></div>
           <div class="modal__content modal__content--lg">
-            <button type="button" class="modal__close" id="servicioModalClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-            <h3 class="modal__title" id="servicioModalTitle">Nuevo Servicio</h3>
-            <form id="servicioForm" novalidate>
-              <input type="hidden" id="servicioId" />
-              <div class="form__group">
-                <label class="form__label" for="svcNombre">Nombre *</label>
-                <input type="text" class="form__input" id="svcNombre" required />
-              </div>
-              <div class="form__row">
-                <div class="form__group">
-                  <label class="form__label" for="svcCategoria">Categoría *</label>
-                  <select class="form__input" id="svcCategoria" required>
-                    <option value="">Seleccionar...</option>
-                    <option value="Jardinería">Jardinería</option>
-                    <option value="Forestal">Forestal</option>
-                    <option value="Agricultura">Agricultura</option>
-                    <option value="Energía">Energía</option>
-                    <option value="Agua">Agua</option>
-                    <option value="Automotor">Automotor</option>
-                    <option value="General">General</option>
-                  </select>
-                </div>
-                <div class="form__group">
-                  <label class="form__label" for="svcPrecio">Precio base ($) *</label>
-                  <input type="number" class="form__input" id="svcPrecio" min="0" step="100" required />
-                </div>
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="svcDescripcion">Descripción *</label>
-                <textarea class="form__input form__textarea" id="svcDescripcion" rows="3" required></textarea>
-              </div>
-              <div class="form__row">
-                <div class="form__group">
-                  <label class="form__label" for="svcTiempo">Tiempo estimado</label>
-                  <input type="text" class="form__input" id="svcTiempo" placeholder="ej: 1-2 días hábiles" />
-                </div>
-                <div class="form__group">
-                  <label class="form__label" for="svcImagen">Ruta de imagen *</label>
-                  <input type="text" class="form__input" id="svcImagen" required />
-                </div>
-              </div>
-              <div class="form__group form__group--check">
-                <input type="checkbox" id="svcDisponible" checked />
-                <label for="svcDisponible">Visible en el catálogo público</label>
-              </div>
-              <div class="form__actions">
-                <button type="button" class="btn btn--secondary" id="servicioModalCancel">Cancelar</button>
-                <button type="submit" class="btn btn--primary" id="servicioFormSubmit">
-                  <span id="servicioSubmitText">Guardar Servicio</span>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── ANALÍTICA ──────────────────────────────────────────── -->
-      <section class="admin-panel" id="panel-analytics">
-        <div class="charts-grid">
-          <div class="chart-card chart-card--wide">
-            <div class="chart-card__header">
-              <div>
-                <div class="chart-card__title">Visitas por Página — Últimos 7 días</div>
-                <div class="chart-card__subtitle">Accesos registrados desde el sitio público</div>
-              </div>
+            <div class="modal__header">
+              <h3 class="modal__title" id="servicioModalTitle">Nuevo Servicio</h3>
+              <button type="button" class="modal__close" id="servicioModalClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <canvas id="chartVisitas" height="200"></canvas>
+            <div class="modal__body">
+              <form id="servicioForm" novalidate>
+                <input type="hidden" id="servicioId" />
+                <div class="form__block">
+                  <div class="form__block-title"><i class="fa-solid fa-screwdriver-wrench"></i> Datos del Servicio</div>
+                  <div class="form__group">
+                    <label class="form__label" for="svcNombre">Nombre *</label>
+                    <input type="text" class="form__input" id="svcNombre" required />
+                  </div>
+                  <div class="form__row">
+                    <div class="form__group">
+                      <label class="form__label" for="svcCategoria">Categoría *</label>
+                      <select class="form__input" id="svcCategoria" required>
+                        <option value="">Seleccionar...</option>
+                        <option value="Jardinería">Jardinería</option>
+                        <option value="Forestal">Forestal</option>
+                        <option value="Agricultura">Agricultura</option>
+                        <option value="Energía">Energía</option>
+                        <option value="Agua">Agua</option>
+                        <option value="Automotor">Automotor</option>
+                        <option value="General">General</option>
+                      </select>
+                    </div>
+                    <div class="form__group">
+                      <label class="form__label" for="svcPrecio">Precio base ($) *</label>
+                      <input type="number" class="form__input" id="svcPrecio" min="0" step="100" required />
+                    </div>
+                  </div>
+                  <div class="form__group">
+                    <label class="form__label" for="svcDescripcion">Descripción *</label>
+                    <textarea class="form__input form__textarea" id="svcDescripcion" rows="3" required></textarea>
+                  </div>
+                  <div class="form__row">
+                    <div class="form__group">
+                      <label class="form__label" for="svcTiempo">Tiempo estimado</label>
+                      <input type="text" class="form__input" id="svcTiempo" placeholder="ej: 1-2 días hábiles" />
+                    </div>
+                    <div class="form__group">
+                      <label class="form__label" for="svcImagen">Ruta de imagen *</label>
+                      <input type="text" class="form__input" id="svcImagen" required />
+                    </div>
+                  </div>
+                  <div class="form__group form__group--check">
+                    <input type="checkbox" id="svcDisponible" checked />
+                    <label for="svcDisponible">Visible en el catálogo público</label>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="form__actions">
+              <button type="button" class="btn btn--secondary" id="servicioModalCancel">Cancelar</button>
+              <button type="button" class="btn btn--primary" id="servicioFormSubmit" onclick="document.getElementById('servicioForm').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}))">
+                <span id="servicioSubmitText">Guardar Servicio</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           ANALÍTICA
+           ══════════════════════════════════════════════════════════ -->
+      <section class="admin-panel" id="panel-analytics">
+        <div class="panel-head">
+          <h2 class="panel-head__title">Analítica</h2>
+        </div>
+        <div class="analytics-body">
+          <div class="chart-area">
+            <div class="chart-area__title">Visitas por Página — Últimos 7 días</div>
+            <div class="chart-area__sub">Accesos registrados desde el sitio público</div>
+            <canvas id="chartVisitas" height="180"></canvas>
           </div>
         </div>
       </section>
 
-    </div>
-  </div>
+    </div><!-- admin-main -->
+  </div><!-- admin-layout -->
 
   <!-- Toast & Confirm -->
   <div class="toast" id="toast" role="alert" aria-live="polite"></div>
